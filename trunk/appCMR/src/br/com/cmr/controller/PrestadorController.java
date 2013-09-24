@@ -34,4 +34,7 @@ public class PrestadorController {
     public List<Prestador> finfPrestador(){
         return facade.findAll();
     }
+    public List<Prestador> findNome(String nome){
+        return facade.findNome(nome);
+    }
 }

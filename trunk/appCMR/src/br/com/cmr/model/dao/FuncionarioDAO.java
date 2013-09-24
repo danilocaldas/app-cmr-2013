@@ -24,6 +24,8 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             + "SOBRENOME = ?, CARGO = ? where ID = ?";
     private static final String sqlDelete = "delete from FUNCIONARIO where ID = ? ";
     private static final String sqlFindAll = "select * from FUNCIONARIO";
+    private static final String sqlFindNome = "select * from FUNCIONARIO where nome like ? order by nome";
+    
 
     @Override
     public int save(Funcionario funcionario) {
@@ -135,5 +137,35 @@ public class FuncionarioDAO implements IFuncionarioDAO{
         }
         return funcionarios;
     } 
+
+    @Override
+    public List<Funcionario> findNome(String nome) {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement pstm = null;
+        List<Funcionario> funcionarios = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            pstm = conn.prepareStatement(sqlFindNome);
+            pstm.setString(1, nome);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Funcionario funcionario = new  Funcionario();
+                funcionario.setNome(rs.getString("nome"));
+                funcionarios.add(funcionario);
+            }
+        } catch (SQLException ex) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            } finally {
+                DBConnection.close(conn, pstm, rs);
+            }
+            ex.printStackTrace();
+        }
+        return funcionarios;
+    }
     
 }

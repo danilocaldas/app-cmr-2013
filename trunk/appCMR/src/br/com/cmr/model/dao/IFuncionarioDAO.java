@@ -17,4 +17,5 @@ public interface IFuncionarioDAO {
     int update(Funcionario funcionario);
     int remove(Long id);
     List<Funcionario> findAll();
+    List<Funcionario> findNome(String nome);
 }

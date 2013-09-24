@@ -35,4 +35,8 @@ public class ProcedimentoController {
     public List<Procedimento> finfPProcedimento(){
         return facade.findAll();
     }
+    
+    public List<Procedimento> finfNome(String nome){
+        return facade.findNome(nome);
+    }
 }

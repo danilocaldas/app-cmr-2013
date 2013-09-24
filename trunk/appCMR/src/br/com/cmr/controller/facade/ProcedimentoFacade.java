@@ -36,4 +36,8 @@ public class ProcedimentoFacade {
     public List<Procedimento> findAll() {
         return dao.findAll();
     }
+    
+    public List<Procedimento> findNome(String nome) {
+        return dao.findNome(nome);
+    }
 }

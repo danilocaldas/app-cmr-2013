@@ -31,27 +31,43 @@ public class ProducaoActionControl implements ActionListener {
     public List<Procedimento> listProdimento;
     public List<Prestador> listPrestador;
     public List<Funcionario> listFuncionario;
-    
     private Long idProducao;
 
     public ProducaoActionControl(FormProducao frm) {
         this.frm = frm;
         addButoesToForm();
         refreshTable();
+        refreshCombo();
         enableFilds(false);
         frm.getTxtId().setEnabled(false);
-        refreshCombo();
-
     }
-    
-    
-    private void refreshCombo(){
-        listFuncionario = new FuncionarioController().finfFuncionario();
-        listPrestador = new PrestadorController().finfPrestador();
-        listProdimento = new ProcedimentoController().finfPProcedimento();
-        if(listFuncionario != null){
-            for(int i = 0; i < listFuncionario.size(); i++){
-            frm.getComboFuncionario().addItem(listFuncionario.get(i).getNome());
+
+    private void refreshCombo() {
+        listFuncionario = new FuncionarioController().findNome("%%");
+        listPrestador = new PrestadorController().findNome("%%");
+        listProdimento = new ProcedimentoController().finfNome("%%");
+        frm.getComboFuncionario().removeAllItems();
+        frm.getComboPrestador().removeAllItems();
+        frm.getComboProcedimento().removeAllItems();
+
+        frm.getComboPesquisaFuncionario().removeAllItems();
+        frm.getComboPesquisaPrestador().removeAllItems();
+
+        if (listFuncionario != null) {
+            for (int i = 0; i < listFuncionario.size(); i++) {
+                frm.getComboFuncionario().addItem(listFuncionario.get(i).getNome());
+                frm.getComboPesquisaFuncionario().addItem(listFuncionario.get(i).getNome());
+            }
+        }
+        if (listPrestador != null) {
+            for (int i = 0; i < listPrestador.size(); i++) {
+                frm.getComboPrestador().addItem(listPrestador.get(i).getNome());
+                frm.getComboPesquisaPrestador().addItem(listPrestador.get(i).getNome());
+            }
+        }
+        if (listProdimento != null) {
+            for (int i = 0; i < listProdimento.size(); i++) {
+                frm.getComboProcedimento().addItem(listProdimento.get(i).getNome());
             }
         }
     }

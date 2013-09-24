@@ -35,5 +35,6 @@ public class ProducaoController {
     public List<Producao> listarProducao(){
         return facade.findAll();
     }
+    
 }
 

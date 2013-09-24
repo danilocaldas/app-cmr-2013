@@ -36,4 +36,8 @@ public class FuncionarioFacade {
     public List<Funcionario> findAll(){
         return dao.findAll();
     }
+    
+    public List<Funcionario> findNome(String nome){
+        return dao.findNome(nome);
+    }
 }
