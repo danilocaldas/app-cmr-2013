@@ -24,6 +24,7 @@ public class ProcedimentoDAO implements IProcedimentoDAO {
             + "NOME = ? where ID = ?";
     private static final String sqlDelete = "delete from PROCEDIMENTO where ID = ? ";
     private static final String sqlFindAll = "select * from PROCEDIMENTO";
+    private static final String sqlFindNome = "select * from PROCEDIMENTO where nome like ? order by nome";
 
     @Override
     public int save(Procedimento procedimento) {
@@ -115,6 +116,36 @@ public class ProcedimentoDAO implements IProcedimentoDAO {
                 Procedimento procedimento = new Procedimento();
                 procedimento.setId(rs.getLong("id"));
                 procedimento.setCodigo(rs.getString("codigo"));
+                procedimento.setNome(rs.getString("nome"));
+                procedimentos.add(procedimento);
+            }
+        } catch (SQLException ex) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            } finally {
+                DBConnection.close(conn, pstm, rs);
+            }
+            ex.printStackTrace();
+        }
+        return procedimentos;
+    }
+
+    @Override
+    public List<Procedimento> findNome(String nome) {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement pstm = null;
+        List<Procedimento> procedimentos = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            pstm = conn.prepareStatement(sqlFindNome);
+            pstm.setString(1, nome);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Procedimento procedimento = new  Procedimento();
                 procedimento.setNome(rs.getString("nome"));
                 procedimentos.add(procedimento);
             }

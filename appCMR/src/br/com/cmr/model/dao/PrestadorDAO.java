@@ -24,6 +24,7 @@ public class PrestadorDAO implements IPrestadorDAO{
             + "NOME = ? where ID = ?";
     private static final String sqlDelete = "delete from PRESTADOR where ID = ? ";
     private static final String sqlFindAll = "select * from PRESTADOR";
+    private static final String sqlFindNome = "select * from PRESTADOR where nome like ? order by nome";
 
     @Override
     public int save(Prestador prestador) {
@@ -132,5 +133,36 @@ public class PrestadorDAO implements IPrestadorDAO{
         }
         return prestadores;
     }
+
+    @Override
+    public List<Prestador> findNome(String nome) {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement pstm = null;
+        List<Prestador> prestadores = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            pstm = conn.prepareStatement(sqlFindNome);
+            pstm.setString(1, nome);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Prestador prestador = new  Prestador();
+                prestador.setNome(rs.getString("nome"));
+                prestadores.add(prestador);
+            }
+        } catch (SQLException ex) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            } finally {
+                DBConnection.close(conn, pstm, rs);
+            }
+            ex.printStackTrace();
+        }
+        return prestadores;
+    }
+    
     
 }

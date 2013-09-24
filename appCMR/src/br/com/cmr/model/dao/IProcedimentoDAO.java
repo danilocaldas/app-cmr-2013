@@ -16,4 +16,5 @@ public interface IProcedimentoDAO {
     int update(Procedimento procedimento);
     int remove(Long id);
     List<Procedimento> findAll();
+    List<Procedimento> findNome(String nome);
 }

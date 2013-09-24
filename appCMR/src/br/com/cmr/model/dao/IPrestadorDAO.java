@@ -16,4 +16,5 @@ public interface IPrestadorDAO {
     int update(Prestador prestador);
     int remove(Long id);
     List<Prestador> findAll();
+    List<Prestador> findNome(String nome);
 }

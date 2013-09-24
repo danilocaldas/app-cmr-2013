@@ -35,4 +35,8 @@ public class FuncionarioController {
     public List<Funcionario> finfFuncionario(){
         return facade.findAll();
     }
+    
+    public List<Funcionario> findNome(String nome){
+        return facade.findNome(nome);
+    }
 }
