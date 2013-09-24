@@ -18,7 +18,10 @@ import br.com.cmr.view.tables.ProducaoCellRenderer;
 import br.com.cmr.view.tables.ProducaoTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -84,16 +87,17 @@ public class ProducaoActionControl implements ActionListener {
         frm.getComboFuncionario().setEnabled(enabled);
         frm.getComboPrestador().setEnabled(enabled);
         frm.getComboProcedimento().setEnabled(enabled);
-        frm.getTxtDataDigitacão().setEnabled(enabled);
         frm.getTxtDataEntrada().setEnabled(enabled);
+        frm.getTxtDataDigitacao().setEnabled(enabled);
         frm.getTxtQuantidade().setEnabled(enabled);
 
     }
 
-    private void limparCampos() {
-        frm.getTxtDataDigitacão().setText("");
-        frm.getTxtDataEntrada().setText("");
+    private void onCancelar() {
+        frm.getTxtDataDigitacao().setDate(null);
+        frm.getTxtDataEntrada().setDate(null);
         frm.getTxtQuantidade().setText("");
+        frm.getTxtId().setText("");
     }
 
     @Override
@@ -102,14 +106,108 @@ public class ProducaoActionControl implements ActionListener {
             case "Novo":
                 enableFilds(true);
                 break;
-
             case "Cancelar":
-                limparCampos();
+                onCancelar();
                 enableFilds(false);
                 break;
-
+            case "Salvar":
+                onSaveProducao();
+                break;
+            case "Atualizar":
+                onAlterarProducao();
+                break;
+            case "Excluir":
+                removerProducao();
+                break;
         }
 
+    }
+
+    private boolean verificarPreencherDatas() {
+        if (frm.getTxtDataDigitacao().getDate() != null && frm.getTxtDataEntrada().getDate() != null && frm.getTxtQuantidade().getText().length() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void onSaveProducao() {
+        Producao producao = new Producao();
+        if (verificarPreencherDatas()) {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date dataEntrada = (java.util.Date) frm.getTxtDataEntrada().getDate();
+            java.util.Date dataDigitacao = (java.util.Date) frm.getTxtDataDigitacao().getDate();
+
+            
+            producao.setDataEntrada(Date.valueOf(formato.format(dataEntrada)));
+            producao.setDataDigitacao(Date.valueOf(formato.format(dataDigitacao)));
+            producao.setFuncionario(frm.getComboFuncionario().getSelectedItem().toString());
+            producao.setPrestador(frm.getComboPrestador().getSelectedItem().toString());
+            producao.setProcedimento(frm.getComboProcedimento().getSelectedItem().toString());
+
+            producao.setQuantidade(frm.getTxtQuantidade().getText());
+
+        } else {
+            JOptionPane.showMessageDialog(frm, "Todos os campos são obrigatórios!");
+            return;
+        }
+
+        int result = 0;
+        if (idProducao == null) {
+            result = new ProducaoController().salvarProducao(producao);
+        } else {
+            producao.setId(idProducao);
+            result = new ProducaoController().atualizarProducao(producao);
+            idProducao = null;
+        }
+
+        if (result == 1) {
+            JOptionPane.showMessageDialog(frm, "Produção inserido com sucesso!");
+            enableFilds(false);
+            onCancelar();
+            refreshTable();
+        } else {
+            JOptionPane.showMessageDialog(frm, "Tente novamente!");
+        }
+    }
+
+    private void onAlterarProducao() {
+        int indexRow = frm.getTbProducao().getSelectedRow();
+        if (indexRow == -1) {
+            JOptionPane.showMessageDialog(frm, "Selecione a produção a ser alterada!");
+            return;
+        }
+        Producao producao = new ProducaoTableModel(listProducao).get(indexRow);
+        idProducao = producao.getId();
+        frm.getTxtId().setText(String.valueOf(producao.getId()));
+        frm.getComboFuncionario().setSelectedItem(producao.getFuncionario());
+        frm.getComboPrestador().setSelectedItem(producao.getPrestador());
+        frm.getComboProcedimento().setSelectedItem(producao.getProcedimento());
+        frm.getTxtDataEntrada().setDate(producao.getDataEntrada());
+        frm.getTxtDataDigitacao().setDate(producao.getDataDigitacao());
+        frm.getTxtQuantidade().setText(producao.getQuantidade());
+        enableFilds(true);
+
+    }
+
+    private void removerProducao() {
+        int indexRow = frm.getTbProducao().getSelectedRow();
+        if (indexRow == -1) {
+            JOptionPane.showMessageDialog(frm, "Selecione a produção a ser removida!");
+            return;
+        }
+        Producao producao = new ProducaoTableModel(listProducao).get(indexRow);
+        int confirm = JOptionPane.showConfirmDialog(frm, "Confirmar a exclusão?", "Excluir Produção", JOptionPane.YES_NO_OPTION);
+        if (confirm != 0) {
+            return;
+        }
+        int result = new ProducaoController().deletarProducao(producao.getId());
+        if (result == 1) {
+            JOptionPane.showMessageDialog(frm, "Produção removida com sucesso!");
+            refreshTable();
+        } else {
+            JOptionPane.showMessageDialog(frm, "Tente novamente!");
+        }
     }
 
     private void addButoesToForm() {

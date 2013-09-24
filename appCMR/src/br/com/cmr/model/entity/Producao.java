@@ -4,8 +4,7 @@
  */
 package br.com.cmr.model.entity;
 
-import java.util.Date;
-
+import java.sql.Date;
 /**
  *
  * @author Danilo

@@ -97,7 +97,7 @@ public class ProcedimentoActionControl implements ActionListener {
     private void onAlterarProcedimento() {
         int indexRow = frm.getTbProcedimento().getSelectedRow();
         if (indexRow == -1) {
-            JOptionPane.showMessageDialog(frm, "Selecione o livro a ser alterado!");
+            JOptionPane.showMessageDialog(frm, "Selecione o procedimento a ser alterado!");
             return;
         }
         Procedimento procedimento = new ProcedimentoTableModel(listProcedimento).get(indexRow);
@@ -111,7 +111,7 @@ public class ProcedimentoActionControl implements ActionListener {
     private void removerProcedimento() {
         int indexRow = frm.getTbProcedimento().getSelectedRow();
         if (indexRow == -1) {
-            JOptionPane.showMessageDialog(frm, "Selecione o livro a ser removido!");
+            JOptionPane.showMessageDialog(frm, "Selecione o procedimento a ser removido!");
             return;
         }
         Procedimento procedimento = new ProcedimentoTableModel(listProcedimento).get(indexRow);
