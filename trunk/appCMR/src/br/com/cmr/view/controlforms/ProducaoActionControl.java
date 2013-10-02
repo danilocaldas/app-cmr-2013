@@ -137,8 +137,9 @@ public class ProducaoActionControl implements ActionListener {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date dataEntrada = (java.util.Date) frm.getTxtDataEntrada().getDate();
             java.util.Date dataDigitacao = (java.util.Date) frm.getTxtDataDigitacao().getDate();
-
-            
+            java.util.Date d = new java.util.Date();
+            Date data = Date.valueOf(formato.format(d));
+            producao.setData(data);
             producao.setDataEntrada(Date.valueOf(formato.format(dataEntrada)));
             producao.setDataDigitacao(Date.valueOf(formato.format(dataDigitacao)));
             producao.setFuncionario(frm.getComboFuncionario().getSelectedItem().toString());
@@ -178,11 +179,16 @@ public class ProducaoActionControl implements ActionListener {
             return;
         }
         Producao producao = new ProducaoTableModel(listProducao).get(indexRow);
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date d = new java.util.Date();
+        Date data = Date.valueOf(formato.format(d));
+        
         idProducao = producao.getId();
         frm.getTxtId().setText(String.valueOf(producao.getId()));
         frm.getComboFuncionario().setSelectedItem(producao.getFuncionario());
         frm.getComboPrestador().setSelectedItem(producao.getPrestador());
         frm.getComboProcedimento().setSelectedItem(producao.getProcedimento());
+        producao.setData(data);
         frm.getTxtDataEntrada().setDate(producao.getDataEntrada());
         frm.getTxtDataDigitacao().setDate(producao.getDataDigitacao());
         frm.getTxtQuantidade().setText(producao.getQuantidade());
@@ -222,5 +228,11 @@ public class ProducaoActionControl implements ActionListener {
         frm.getRadioFuncionarioPeriodo().addActionListener(this);
         frm.getRadioPeriodo().addActionListener(this);
         frm.getRadioPrestador().addActionListener(this);
+    }
+    
+    private void pesquisarProPeriodo(){
+        if(frm.getRadioPeriodo().isSelected()){
+            
+        }
     }
 }

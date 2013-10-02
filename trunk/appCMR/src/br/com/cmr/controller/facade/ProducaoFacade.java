@@ -7,6 +7,7 @@ package br.com.cmr.controller.facade;
 import br.com.cmr.model.dao.IProducaoDAO;
 import br.com.cmr.model.dao.ProducaoDAO;
 import br.com.cmr.model.entity.Producao;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -34,5 +35,21 @@ public class ProducaoFacade {
     }
     public List<Producao> findAll(){
         return dao.findAll();
+    }
+    
+    public List<Producao> findProPeriodo(Date dataInicial, Date dataFinal){
+        return dao.findProPeriodo(dataInicial, dataFinal);
+    }
+    
+    public List<Producao> findProFuncionario(String funcionario){
+        return  dao.findProFuncionario(funcionario);
+    }
+    
+    public List<Producao> findProFuncioPeriodo(String funcionario, Date dataInicial, Date dataFinal){
+        return dao.findProFuncioPeriodo(funcionario, dataInicial, dataFinal);
+    }
+    
+    public List<Producao> findProPrestador(String prestador){
+        return dao.findProPrestador(prestador);
     }
 }
