@@ -5,6 +5,7 @@
 package br.com.cmr.model.dao;
 
 import br.com.cmr.model.entity.Producao;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -17,5 +18,10 @@ public interface IProducaoDAO {
     int update(Producao producao);
     int excluir(Long id);
     List<Producao> findAll();
+    List<Producao> findProPeriodo(Date dataInicial, Date dataFinal);
+    List<Producao> findProFuncionario(String funcionario);
+    List<Producao> findProFuncioPeriodo(String funcionario, Date dataInicial, Date dataFinal);
+    List<Producao> findProPrestador(String prestador);
+    
     
 }
