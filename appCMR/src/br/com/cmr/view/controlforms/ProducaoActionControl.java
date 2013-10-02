@@ -83,6 +83,21 @@ public class ProducaoActionControl implements ActionListener {
         }
     }
 
+    private void refreshTablePeriodo() {
+        if (validarCamposDataPesquisa()) {
+            
+            
+            listProducao = new ProducaoController().listarProPeriodo(null, null);
+        }
+        if (listProducao != null) {
+            frm.getTbProducao().setModel(new ProducaoTableModel(listProducao));
+            frm.getTbProducao().setDefaultRenderer(Object.class, new ProducaoCellRenderer());
+        } else {
+            JOptionPane.showMessageDialog(frm, "Nenhum Registro encontrado!",
+                    "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
     private void enableFilds(boolean enabled) {
         frm.getComboFuncionario().setEnabled(enabled);
         frm.getComboPrestador().setEnabled(enabled);
@@ -118,6 +133,9 @@ public class ProducaoActionControl implements ActionListener {
                 break;
             case "Excluir":
                 removerProducao();
+                break;
+            case "Pesquisar":
+                refreshTablePeriodo();
                 break;
         }
 
@@ -182,7 +200,7 @@ public class ProducaoActionControl implements ActionListener {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date d = new java.util.Date();
         Date data = Date.valueOf(formato.format(d));
-        
+
         idProducao = producao.getId();
         frm.getTxtId().setText(String.valueOf(producao.getId()));
         frm.getComboFuncionario().setSelectedItem(producao.getFuncionario());
@@ -229,10 +247,40 @@ public class ProducaoActionControl implements ActionListener {
         frm.getRadioPeriodo().addActionListener(this);
         frm.getRadioPrestador().addActionListener(this);
     }
-    
-    private void pesquisarProPeriodo(){
-        if(frm.getRadioPeriodo().isSelected()){
-            
+
+    private boolean validarProPeriodo() {
+        if (frm.getRadioPeriodo().isSelected()) {
+            return true;
         }
+        return false;
+    }
+
+    private boolean validarProFuncionario() {
+        if (frm.getRadioFuncionario().isSelected()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validarProFuncPeriodo() {
+        if (frm.getRadioFuncionarioPeriodo().isSelected()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validarProPrestador() {
+        if (frm.getRadioPrestador().isSelected()) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validarCamposDataPesquisa() {
+        if (frm.getTxtDataDe().getDate() != null && frm.getTxtDataAte().getDate() != null) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(frm, "É necessário o preechimento do período desejado!", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
+        return false;
     }
 }
