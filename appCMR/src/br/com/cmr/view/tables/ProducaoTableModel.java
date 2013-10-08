@@ -5,6 +5,7 @@
 package br.com.cmr.view.tables;
 
 import br.com.cmr.model.entity.Producao;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -42,6 +43,7 @@ public class ProducaoTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Producao producao = valores.get(rowIndex);
+        SimpleDateFormat formatdata = new SimpleDateFormat("dd/MM/yyyy");
         if (columnIndex == COL_ID) {
             return producao.getId();
         } else if (columnIndex == COL_FUNCIONARIO) {
@@ -51,11 +53,11 @@ public class ProducaoTableModel extends AbstractTableModel {
         }else if (columnIndex == COL_PROCEDIMENTO) {
             return producao.getProcedimento();
         }else if (columnIndex == COL_DATA) {
-            return producao.getData();
+            return formatdata.format(producao.getData());
         }else if (columnIndex == COL_DATA_ENTRADA) {
-            return producao.getDataEntrada();
+            return formatdata.format(producao.getDataEntrada());
         }else if (columnIndex == COL_DATA_DIGITACAO) {
-            return producao.getDataDigitacao();
+            return formatdata.format(producao.getDataDigitacao());
         }else if (columnIndex == COL_QUANTIDADE) {
             return producao.getQuantidade();
         }
