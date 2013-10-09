@@ -10,14 +10,14 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author Danilo
  */
-public class ProducaoDAO implements IProducaoDAO{
+public class ProducaoDAO implements IProducaoDAO {
 
     private static final String sqlInsert = "insert into PRODUCAO (FUNCIONARIO, PRESTADOR, PROCEDIMENTO,"
             + "DATA, DATA_ENTRADA, DATA_DIGITACAO, QUANTIDADE)"
@@ -30,10 +30,10 @@ public class ProducaoDAO implements IProducaoDAO{
     private static final String sqlFindAll = "select * from PRODUCAO";
     private static final String sqlFindProPeriodo = "select * from PRODUCAO where DATA_DIGITACAO between ? and ?";
     private static final String sqlFindProFuncionario = "select * from PRODUCAO where FUNCIONARIO like ?";
-    private static final String sqlFindProFuncioPeriodo = "select * from PRODUCAO where FUNCIONARIO = ?"
+    private static final String sqlFindProFuncioPeriodo = "select * from PRODUCAO where FUNCIONARIO like ?"
             + " and DATA_DIGITACAO between ? and ?";
     private static final String sqlFindProPrestador = "select * from PRODUCAO where PRESTADOR like ?";
-    
+
     @Override
     public int save(Producao producao) {
         Connection conn = DBConnection.getConnection();
@@ -92,7 +92,7 @@ public class ProducaoDAO implements IProducaoDAO{
             }
             ex.printStackTrace();
         }
-        return result;  
+        return result;
     }
 
     @Override
@@ -116,7 +116,7 @@ public class ProducaoDAO implements IProducaoDAO{
             }
             ex.printStackTrace();
         }
-        return result;  
+        return result;
     }
 
     @Override
