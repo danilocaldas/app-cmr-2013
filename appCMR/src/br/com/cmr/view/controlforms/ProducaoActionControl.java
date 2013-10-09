@@ -39,7 +39,7 @@ public class ProducaoActionControl implements ActionListener {
     public ProducaoActionControl(FormProducao frm) {
         this.frm = frm;
         addButoesToForm();
-        refreshTable();
+        //refreshTable();
         refreshCombo();
         enableFilds(false);
         frm.getTxtId().setEnabled(false);
@@ -75,27 +75,48 @@ public class ProducaoActionControl implements ActionListener {
         }
     }
 
-    private void refreshTable() {
-        listProducao = new ProducaoController().listarProducao();
+    private void mostraDadosTable() {
         if (listProducao != null) {
             frm.getTbProducao().setModel(new ProducaoTableModel(listProducao));
             frm.getTbProducao().setDefaultRenderer(Object.class, new ProducaoCellRenderer());
         }
     }
 
+    private void refreshTable() {
+        listProducao = new ProducaoController().listarProducao();
+        mostraDadosTable();
+    }
+
+    private void refreshTableFuncionario() {
+        listProducao = new ProducaoController().listarProFuncionario("%" + frm.getComboPesquisaFuncionario().
+                getSelectedItem().toString() + "%");
+        mostraDadosTable();
+    }
+
+    private void refreshTablePrestador() {
+        listProducao = new ProducaoController().listarProPrestador("%" + frm.getComboPesquisaPrestador().
+                getSelectedItem().toString() + "%");
+        mostraDadosTable();
+    }
+
     private void refreshTablePeriodo() {
-        if (validarCamposDataPesquisa()) {
-            
-            
-            listProducao = new ProducaoController().listarProPeriodo(null, null);
-        }
-        if (listProducao != null) {
-            frm.getTbProducao().setModel(new ProducaoTableModel(listProducao));
-            frm.getTbProducao().setDefaultRenderer(Object.class, new ProducaoCellRenderer());
-        } else {
-            JOptionPane.showMessageDialog(frm, "Nenhum Registro encontrado!",
-                    "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
-        }
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date dataInicial = (java.util.Date) frm.getTxtDataDe().getDate();
+        java.util.Date dataFinal = (java.util.Date) frm.getTxtDataAte().getDate();
+        listProducao = new ProducaoController().listarProPeriodo(Date.valueOf(formato.format(dataInicial)),
+                Date.valueOf(formato.format(dataFinal)));
+        mostraDadosTable();
+    }
+
+    private void refreshTableFuncionarioPeriodo() {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date dataInicial = (java.util.Date) frm.getTxtDataDe().getDate();
+        java.util.Date dataFinal = (java.util.Date) frm.getTxtDataAte().getDate();
+        listProducao = new ProducaoController().listarProFunPeriodo(
+                "%" + frm.getComboPesquisaFuncionario().getSelectedItem().toString() + "%",
+                Date.valueOf(formato.format(dataInicial)),
+                Date.valueOf(formato.format(dataFinal)));
+        mostraDadosTable();
     }
 
     private void enableFilds(boolean enabled) {
@@ -105,6 +126,7 @@ public class ProducaoActionControl implements ActionListener {
         frm.getTxtDataEntrada().setEnabled(enabled);
         frm.getTxtDataDigitacao().setEnabled(enabled);
         frm.getTxtQuantidade().setEnabled(enabled);
+
 
     }
 
@@ -135,8 +157,11 @@ public class ProducaoActionControl implements ActionListener {
                 removerProducao();
                 break;
             case "Pesquisar":
-                refreshTablePeriodo();
-                break;
+                pesquisarProducaoGeral();
+                pesquisarProdPorProfissional();
+                pesquisarProdPorPrestador();
+                pesquisarProdPorPeriodo();
+                pesquisarProdPorPeriodoProfissional();
         }
 
     }
@@ -248,39 +273,46 @@ public class ProducaoActionControl implements ActionListener {
         frm.getRadioPrestador().addActionListener(this);
     }
 
-    private boolean validarProPeriodo() {
-        if (frm.getRadioPeriodo().isSelected()) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean validarProFuncionario() {
-        if (frm.getRadioFuncionario().isSelected()) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean validarProFuncPeriodo() {
-        if (frm.getRadioFuncionarioPeriodo().isSelected()) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean validarProPrestador() {
-        if (frm.getRadioPrestador().isSelected()) {
-            return true;
-        }
-        return false;
-    }
-
     private boolean validarCamposDataPesquisa() {
         if (frm.getTxtDataDe().getDate() != null && frm.getTxtDataAte().getDate() != null) {
             return true;
         }
         JOptionPane.showMessageDialog(frm, "É necessário o preechimento do período desejado!", "Pesquisa", JOptionPane.INFORMATION_MESSAGE);
         return false;
+    }
+
+    public void pesquisarProducaoGeral() {
+        if (frm.getRadioGeral().isSelected()) {
+            //limparTabela(producoes);
+            refreshTable();
+        }
+    }
+
+    public void pesquisarProdPorPeriodo() {
+        if (frm.getRadioPeriodo().isSelected() && validarCamposDataPesquisa()) {
+            //limparTabela(producoes);
+            refreshTablePeriodo();
+        }
+    }
+
+    public void pesquisarProdPorProfissional() {
+        if (frm.getRadioFuncionario().isSelected()) {
+            //limparTabela(producoes);
+            refreshTableFuncionario();
+        }
+    }
+
+    public void pesquisarProdPorPeriodoProfissional() {
+        if (frm.getRadioPeriodo().isSelected() && validarCamposDataPesquisa()) {
+            //limparTabela(producoes);
+            refreshTableFuncionarioPeriodo();
+        }
+    }
+
+    public void pesquisarProdPorPrestador() {
+        if (frm.getRadioPrestador().isSelected()) {
+            //limparTabela(producoes);
+            refreshTablePrestador();
+        }
     }
 }
