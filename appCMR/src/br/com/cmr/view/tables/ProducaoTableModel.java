@@ -6,7 +6,6 @@ package br.com.cmr.view.tables;
 
 import br.com.cmr.model.entity.Producao;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
