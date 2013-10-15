@@ -136,4 +136,30 @@ public class DBConnection {
             close(connection, stmt, null);
         }
     }
+    
+    public static void createTableProducaoMedica(){
+        Connection connection = getConnection();
+        PreparedStatement stmt = null;
+        String sql = "CREATE TABLE IF NOT EXISTS producao_medica (\n"
+                + "  ID bigint(20) NOT NULL AUTO_INCREMENT,\n"
+                + "  data_entrada_cmr DATE NOT NULL,\n"
+                + "  prestador VARCHAR(50) NOT NULL,\n"
+                + "  procedimento VARCHAR(50) NOT NULL,\n"
+                + "  quantidade_laudos int NOT NULL,\n"
+                + "  data_analise DATE NOT NULL,\n"
+                + "  funcionario VARCHAR(50) NOT NULL,\n"
+                + "  data_encaminhamento DATE NOT NULL,\n"
+                + "  nucleos VARCHAR(50) NOT NULL,\n"
+                + "PRIMARY KEY (ID)\n"
+                + ")";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.execute();
+            System.out.println("Create Tables ProduçãoMedica Ok!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, stmt, null);
+        }
+    }
 }
