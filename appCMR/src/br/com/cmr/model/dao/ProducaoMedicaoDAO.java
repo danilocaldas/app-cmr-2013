@@ -6,6 +6,7 @@ package br.com.cmr.model.dao;
 
 import br.com.cmr.model.entity.ProducaoMedica;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,9 +22,14 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
     public static final String sqlInsert = "insert into producao_medica "
             + "(data_entrada_cmr, prestador, procedimento, quantidade_laudos, "
             + "data_analise, funcionario, data_encaminhamento, nucleos) values (?,?,?,?,?,?,?,?)";
-    public static final String sqlUpdate = "";
-    public static final String sqlDelete = "";
+    public static final String sqlUpdate = "update producao_medica set data_entrada_cmr = ?, "
+            + "prestador = ?, procedimento = ?, quantidade_laudos = ?, data_analise = ?"
+            + ", funcionario = ?, data_encaminhamento = ?, nucleos = ?  where ID = ?";
+    public static final String sqlDelete = "delete from producao_medica where ID = ? ";
     public static final String sqlList = "select * from producao_medica";
+    public static final String sqlListNomePeriodo = "SELECT * FROM PRODUCAO_MEDICA WHERE FUNCIONARIO LIKE ? "
+            + "AND DATA_ANALISE BETWEEN ? AND ?";
+    
 
     @Override
     public int save(ProducaoMedica pMedica) {
@@ -65,14 +71,14 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
         try {
             int index = 0;
             pstm = conn.prepareStatement(sqlUpdate);
-            pstm.setString(++index, pMedica.getFuncionario());
+            pstm.setDate(++index, pMedica.getEntradaCmr());
             pstm.setString(++index, pMedica.getPrestador());
             pstm.setString(++index, pMedica.getProcedimento());
-            pstm.setString(++index, pMedica.getNucleos());
             pstm.setInt(++index, pMedica.getQuantidade());
-            pstm.setDate(++index, pMedica.getEntradaCmr());
             pstm.setDate(++index, pMedica.getAnalise());
+            pstm.setString(++index, pMedica.getFuncionario());
             pstm.setDate(++index, pMedica.getEncaminhamento());
+            pstm.setString(++index, pMedica.getNucleos());
             pstm.setLong(++index, pMedica.getId());
             result = pstm.executeUpdate();
         } catch (SQLException ex) {
@@ -122,6 +128,46 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
         List<ProducaoMedica> pMedicas = new ArrayList();
         try {
             pstm = conn.prepareStatement(sqlList);
+            rs = pstm.executeQuery();
+            while(rs.next()){
+                ProducaoMedica pMedica = new ProducaoMedica();
+                pMedica.setId(rs.getLong("id"));
+                pMedica.setEntradaCmr(rs.getDate("data_entrada_cmr"));
+                pMedica.setPrestador(rs.getString("prestador"));
+                pMedica.setProcedimento(rs.getString("procedimento"));
+                pMedica.setQuantidade(rs.getInt("quantidade_laudos"));
+                pMedica.setAnalise(rs.getDate("data_analise"));
+                pMedica.setFuncionario(rs.getString("funcionario"));
+                pMedica.setEncaminhamento(rs.getDate("data_encaminhamento"));
+                pMedica.setNucleos(rs.getString("nucleos"));
+                pMedicas.add(pMedica);
+            } 
+        } catch (SQLException ex) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            } finally {
+                DBConnection.close(conn, pstm, rs);
+            }
+            ex.printStackTrace();
+        }
+        return pMedicas;
+    }
+
+    @Override
+    public List<ProducaoMedica> listarProMedica(String nome, Date dataDe, Date dataAte) {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        List<ProducaoMedica> pMedicas = new ArrayList();
+        try {
+            pstm = conn.prepareStatement(sqlListNomePeriodo);
+            pstm.setString(1, nome);
+            pstm.setDate(2, dataDe);
+            pstm.setDate(3, dataAte);
             rs = pstm.executeQuery();
             while(rs.next()){
                 ProducaoMedica pMedica = new ProducaoMedica();

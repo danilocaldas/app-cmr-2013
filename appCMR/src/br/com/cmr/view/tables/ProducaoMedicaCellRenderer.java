@@ -27,15 +27,19 @@ public class ProducaoMedicaCellRenderer extends DefaultTableCellRenderer {
         if(isSelected){
             setBackground(Color.GREEN);
         }
-        table.getColumnModel().getColumn(0).setMaxWidth(40);
-        table.getColumnModel().getColumn(1).setMaxWidth(100);
-        table.getColumnModel().getColumn(2).setMaxWidth(100);
-        table.getColumnModel().getColumn(3).setMaxWidth(100);
-        table.getColumnModel().getColumn(4).setMaxWidth(100);
-        table.getColumnModel().getColumn(5).setMaxWidth(100);
-        table.getColumnModel().getColumn(6).setMaxWidth(100);
-        table.getColumnModel().getColumn(7).setMaxWidth(100);
-        table.getColumnModel().getColumn(8).setMaxWidth(100);
+        int i = -1;
+        table.getColumnModel().getColumn(++i).setMaxWidth(40);//0
+        table.getColumnModel().getColumn(++i).setMaxWidth(60);//1
+        table.getColumnModel().getColumn(++i).setMaxWidth(150);//2
+        table.getColumnModel().getColumn(++i).setMaxWidth(120);//3
+        table.getColumnModel().getColumn(++i).setMaxWidth(70);//4
+        table.getColumnModel().getColumn(++i).setMaxWidth(60);//5
+        table.getColumnModel().getColumn(++i).setMaxWidth(100);//6
+        table.getColumnModel().getColumn(++i).setMaxWidth(70);//7
+        table.getColumnModel().getColumn(++i).setMaxWidth(100);//8
+        table.getColumnModel().getColumn(++i).setMaxWidth(70);//9
+        table.getColumnModel().getColumn(++i).setMaxWidth(70);//10
+        
         return this;
     }
 }

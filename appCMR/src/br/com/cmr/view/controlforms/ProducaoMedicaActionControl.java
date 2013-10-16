@@ -38,20 +38,21 @@ public class ProducaoMedicaActionControl implements ActionListener {
     public ProducaoMedicaActionControl(FormProducaoMedica form) {
         this.form = form;
         addControleBtn();
-        refreshCombo();
-        refreshTable();
+        refreshComboPesquisaMedica();
         enableFilds(false);
-        
+
     }
-    
-    private void addControleBtn(){
+
+    private void addControleBtn() {
         form.getBtNovo().addActionListener(this);
         form.getBtAtualizar().addActionListener(this);
         form.getBtSalvar().addActionListener(this);
         form.getBtExcluir().addActionListener(this);
         form.getBtCancelar().addActionListener(this);
+        form.getBtPesquisar().addActionListener(this);
+        form.getBtLimpar().addActionListener(this);
     }
-    
+
     private void refreshCombo() {
         listFuncionario = new FuncionarioController().findNome("%%");
         listPrestador = new PrestadorController().findNome("%%");
@@ -76,20 +77,45 @@ public class ProducaoMedicaActionControl implements ActionListener {
             }
         }
     }
-    
+
+    private void refreshComboPesquisaMedica() {
+        listFuncionario = new FuncionarioController().findNome("%%");
+        form.getComboPesquisaMedico().removeAllItems();
+
+        if (listFuncionario != null) {
+            for (int i = 0; i < listFuncionario.size(); i++) {
+
+                form.getComboPesquisaMedico().addItem(listFuncionario.get(i).getNome());
+            }
+        }
+    }
+
     private void mostraDadosTable() {
         if (listProducaoMedica != null) {
             form.getTbProducaoMedica().setModel(new ProducaoMedicaTableModel(listProducaoMedica));
             form.getTbProducaoMedica().setDefaultRenderer(Object.class, new ProducaoMedicaCellRenderer());
         }
     }
-    
-    private void refreshTable() {
-        listProducaoMedica = new ProducaoMedicaController().listarProducao();
+
+//    private void refreshTable() {
+//        listProducaoMedica = new ProducaoMedicaController().listarProducao();
+//        mostraDadosTable();
+//        somar();
+//    }
+
+    private void refreshTableNomePeriodo() {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date dataDe = (java.util.Date) form.getTxtDataDe().getDate();
+        java.util.Date dataAte = (java.util.Date) form.getTxtDataAte().getDate();
+        listProducaoMedica = new ProducaoMedicaController().listarProducaoFunMedico(
+                "%" + form.getComboPesquisaMedico().getSelectedItem().toString() + "%", Date.valueOf(formato.format(dataDe)), Date.valueOf(formato.format(dataAte)));
         mostraDadosTable();
+        somarQtdAnalisada();
+        
     }
-    
+
     private void enableFilds(boolean enabled) {
+
         form.getTxtDataEntrada().setEnabled(enabled);
         form.getComboPrestador().setEnabled(enabled);
         form.getComboProcedimento().setEnabled(enabled);
@@ -101,19 +127,20 @@ public class ProducaoMedicaActionControl implements ActionListener {
     }
 
     private void onCancelar() {
+        limparCombo();
         form.getTxtDataAnalise().setDate(null);
         form.getTxtEncaminhamento().setDate(null);
         form.getTxtDataEntrada().setDate(null);
         form.getTxtQtdLaudos().setText("");
         form.getTxtNucleos().setText("");
     }
-    
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "Novo":
                 enableFilds(true);
+                refreshCombo();
                 break;
             case "Cancelar":
                 onCancelar();
@@ -128,19 +155,26 @@ public class ProducaoMedicaActionControl implements ActionListener {
             case "Excluir":
                 removerProducao();
                 break;
+            case "PESQUISAR":
+                if (form.getTxtDataDe().getDate() != null && form.getTxtDataAte().getDate() != null) {
+                    refreshTableNomePeriodo();
+                } else {
+                    JOptionPane.showMessageDialog(form, "As datas são necessárias para pesquisa.",
+                            "Validação", JOptionPane.ERROR_MESSAGE);
+                }
+                break;
         }
     }
-    
+
     private boolean verificarPreencherDatas() {
-        if (form.getTxtDataEntrada().getDate() == null && form.getTxtDataAnalise().getDate() == null 
-                && form.getTxtEncaminhamento().getDate() == null &&
-                form.getTxtQtdLaudos().getText().length() < 0 && form.getTxtNucleos().getText().equals("")) {
-            return false;
-        } else {
+        if (form.getTxtDataEntrada().getDate() != null && form.getTxtDataAnalise().getDate() != null
+                && form.getTxtEncaminhamento().getDate() != null) {
             return true;
+        } else {
+            return false;
         }
     }
-    
+
     private void onSaveProducao() {
         ProducaoMedica pMedica = new ProducaoMedica();
         if (verificarPreencherDatas()) {
@@ -173,12 +207,11 @@ public class ProducaoMedicaActionControl implements ActionListener {
             JOptionPane.showMessageDialog(form, "Produção inserido com sucesso!");
             enableFilds(false);
             onCancelar();
-            refreshTable();
         } else {
             JOptionPane.showMessageDialog(form, "Tente novamente!");
         }
     }
-    
+
     private void onAlterarProducao() {
         int indexRow = form.getTbProducaoMedica().getSelectedRow();
         if (indexRow == -1) {
@@ -186,19 +219,21 @@ public class ProducaoMedicaActionControl implements ActionListener {
             return;
         }
         ProducaoMedica pMedica = new ProducaoMedicaTableModel(listProducaoMedica).get(indexRow);
-        
+
         idProducaoMedica = pMedica.getId();
+        form.getLabelID().setText(String.valueOf(pMedica.getId()));
         form.getTxtDataEntrada().setDate(pMedica.getEntradaCmr());
         form.getComboPrestador().setSelectedItem(pMedica.getPrestador());
         form.getComboProcedimento().setSelectedItem(pMedica.getProcedimento());
-        //form.getTxtQtdLaudos().setText(Integer.parseInt(pMedica.getQuantidade()));
+        form.getTxtQtdLaudos().setText(String.valueOf(pMedica.getQuantidade()));
         form.getTxtDataAnalise().setDate(pMedica.getAnalise());
         form.getComboFuncionario().setSelectedItem(pMedica.getFuncionario());
         form.getTxtEncaminhamento().setDate(pMedica.getEncaminhamento());
         form.getTxtNucleos().setText(pMedica.getNucleos());
         enableFilds(true);
+        refreshCombo();
     }
-    
+
     private void removerProducao() {
         int indexRow = form.getTbProducaoMedica().getSelectedRow();
         if (indexRow == -1) {
@@ -213,9 +248,27 @@ public class ProducaoMedicaActionControl implements ActionListener {
         int result = new ProducaoMedicaController().deletarProducao(pMedica.getId());
         if (result == 1) {
             JOptionPane.showMessageDialog(form, "Produção removida com sucesso!");
-            refreshTable();
+            refreshTableNomePeriodo();
         } else {
             JOptionPane.showMessageDialog(form, "Tente novamente!");
         }
+    }
+
+   private void somarQtdAnalisada() {
+        int total = 0;
+        String valor = "";
+        int linhas = form.getTbProducaoMedica().getRowCount();
+        for (int i = 0; i < linhas; i++) {
+            valor = String.valueOf(form.getTbProducaoMedica().getValueAt(i, 4));
+            total = total + Integer.parseInt(valor);
+        }
+        form.getLabelTotal().setText("" + total);
+    }
+   
+      
+    private void limparCombo(){
+        form.getComboFuncionario().removeAllItems();
+        form.getComboPrestador().removeAllItems();
+        form.getComboProcedimento().removeAllItems();
     }
 }

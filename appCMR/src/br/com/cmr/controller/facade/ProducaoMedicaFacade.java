@@ -7,6 +7,7 @@ package br.com.cmr.controller.facade;
 import br.com.cmr.model.dao.IProducaoMedicaDAO;
 import br.com.cmr.model.dao.ProducaoMedicaoDAO;
 import br.com.cmr.model.entity.ProducaoMedica;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -35,5 +36,7 @@ public class ProducaoMedicaFacade {
     public List<ProducaoMedica> findAll(){
         return dao.listar();
     }
-    
+    public List<ProducaoMedica> findAllPeriodo(String nome, Date dataDe, Date dataAte){
+        return dao.listarProMedica(nome, dataDe, dataAte);
+    }
 }

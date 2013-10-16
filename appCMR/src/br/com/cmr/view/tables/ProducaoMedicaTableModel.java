@@ -5,7 +5,6 @@
 package br.com.cmr.view.tables;
 
 import br.com.cmr.model.entity.ProducaoMedica;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -25,6 +24,8 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
     private static final int COL_FUNCIONARIO = 6;
     private static final int COL_DATA_ENCAMINHAMENTO = 7;
     private static final int COL_NUCLEOS = 8;
+    private static final int COL_DIA_MEDICO = 9;
+    private static final int COL_DIA_APAC = 10;
     private List<ProducaoMedica> valores;
 
     public ProducaoMedicaTableModel(List<ProducaoMedica> valores) {
@@ -38,13 +39,15 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 9;
+        return 11;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         ProducaoMedica pMedica = valores.get(rowIndex);
         //SimpleDateFormat formatdata = new SimpleDateFormat("dd/MM/yyyy");
+        
+        
         if (columnIndex == COL_ID) {
             return pMedica.getId();
         } else if (columnIndex == COL_ENTRADA_CMR) {
@@ -63,6 +66,10 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
             return pMedica.getEncaminhamento();
         } else if (columnIndex == COL_NUCLEOS) {
             return pMedica.getNucleos();
+        }else if (columnIndex == COL_DIA_MEDICO) {
+            return null;
+        } else if (columnIndex == COL_DIA_APAC) {
+            return null;
         }
         return null;
     }
@@ -98,6 +105,12 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
             case COL_NUCLEOS:
                 colunas = "Núcleos";
                 break;
+            case COL_DIA_MEDICO:
+                colunas = "DIAS/MED.";
+                break;
+            case COL_DIA_APAC:
+                colunas = "DIAS/APAC";
+                break;
             default:
                 throw new IllegalArgumentException("Coluna Inválida!");
         }
@@ -106,29 +119,33 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        if(columnIndex == COL_ID){
+        if (columnIndex == COL_ID) {
             return Long.class;
-        }else if (columnIndex == COL_ENTRADA_CMR) {
+        } else if (columnIndex == COL_ENTRADA_CMR) {
             return Date.class;
-        }else if (columnIndex == COL_PRESTADOR) {
+        } else if (columnIndex == COL_PRESTADOR) {
             return String.class;
-        }else if (columnIndex == COL_PROCEDIMENTO) {
+        } else if (columnIndex == COL_PROCEDIMENTO) {
             return String.class;
-        }else if (columnIndex == COL_QUANTIDADE_LAUDOS) {
+        } else if (columnIndex == COL_QUANTIDADE_LAUDOS) {
             return Integer.class;
-        }else if (columnIndex == COL_DATA_ANALISE) {
+        } else if (columnIndex == COL_DATA_ANALISE) {
             return Date.class;
-        }else if (columnIndex == COL_FUNCIONARIO) {
+        } else if (columnIndex == COL_FUNCIONARIO) {
             return String.class;
-        }else if (columnIndex == COL_DATA_ENCAMINHAMENTO) {
-           return Date.class;
-        }else if (columnIndex == COL_NUCLEOS) {
-           return String.class;
+        } else if (columnIndex == COL_DATA_ENCAMINHAMENTO) {
+            return Date.class;
+        } else if (columnIndex == COL_NUCLEOS) {
+            return String.class;
+        }else if (columnIndex == COL_DIA_MEDICO) {
+            return Date.class;
+        }else if (columnIndex == COL_DIA_APAC) {
+            return Date.class;
         }
-        return null; 
+        return null;
     }
-    public ProducaoMedica get(int row){
+
+    public ProducaoMedica get(int row) {
         return valores.get(row);
     }
-    
 }
