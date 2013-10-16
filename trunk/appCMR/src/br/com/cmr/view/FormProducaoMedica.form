@@ -418,11 +418,13 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="comboPesquisaMedico" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btPesquisar" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btLimpar" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtDataAte" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="comboPesquisaMedico" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btPesquisar" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btLimpar" linkSize="7" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <Component id="txtDataDe" min="-2" max="-2" attributes="0"/>
                       </Group>
