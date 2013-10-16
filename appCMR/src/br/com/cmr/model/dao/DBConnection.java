@@ -19,7 +19,7 @@ public class DBConnection {
     private static final String URL_MYSQL = "jdbc:mysql://localhost/sna_teste";
     private static final String DRIVER_CLASS_MYSQL = "com.mysql.jdbc.Driver";
     private static final String USER = "root";
-    private static final String PASS = "12345";
+    private static final String PASS = "root";
 
     public static Connection getConnection() {
         System.out.println("Conectando ao banco!");

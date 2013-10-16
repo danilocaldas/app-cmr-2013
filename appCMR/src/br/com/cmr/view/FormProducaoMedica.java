@@ -12,7 +12,7 @@ import br.com.cmr.view.controlforms.ProducaoMedicaActionControl;
  */
 public class FormProducaoMedica extends javax.swing.JFrame {
 
-    private ProducaoMedicaActionControl control;
+   public ProducaoMedicaActionControl control;
     
     public FormProducaoMedica() {
        initComponents();
