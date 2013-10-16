@@ -6,6 +6,7 @@ package br.com.cmr.controller;
 
 import br.com.cmr.controller.facade.ProducaoMedicaFacade;
 import br.com.cmr.model.entity.ProducaoMedica;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -34,5 +35,9 @@ public class ProducaoMedicaController {
 
     public List<ProducaoMedica> listarProducao() {
         return facade.findAll();
+    }
+    
+    public List<ProducaoMedica> listarProducaoFunMedico(String nome, Date dataDe, Date dataAte) {
+        return facade.findAllPeriodo(nome, dataDe, dataAte);
     }
 }

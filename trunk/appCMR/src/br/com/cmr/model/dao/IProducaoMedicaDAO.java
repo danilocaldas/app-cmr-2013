@@ -5,8 +5,8 @@
 package br.com.cmr.model.dao;
 
 import br.com.cmr.model.entity.ProducaoMedica;
+import java.sql.Date;
 import java.util.List;
-
 /**
  *
  * @author ritacosta
@@ -19,5 +19,7 @@ public interface IProducaoMedicaDAO {
 
     int delete(Long id);
 
-    public List<ProducaoMedica> listar();
+    List<ProducaoMedica> listar();
+    
+    List<ProducaoMedica> listarProMedica(String nome, Date dataDe, Date dataAte);
 }
