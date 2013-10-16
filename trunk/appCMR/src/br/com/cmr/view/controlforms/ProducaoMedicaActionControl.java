@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
  */
 public class ProducaoMedicaActionControl implements ActionListener {
 
-    private FormProducaoMedica form;
+    public FormProducaoMedica form;
     public List<Procedimento> listProdimento;
     public List<Prestador> listPrestador;
     public List<Funcionario> listFuncionario;
@@ -41,7 +41,6 @@ public class ProducaoMedicaActionControl implements ActionListener {
         refreshCombo();
         refreshTable();
         enableFilds(false);
-        //DBConnection.createTableProducaoMedica();
         
     }
     
@@ -135,7 +134,7 @@ public class ProducaoMedicaActionControl implements ActionListener {
     private boolean verificarPreencherDatas() {
         if (form.getTxtDataEntrada().getDate() == null && form.getTxtDataAnalise().getDate() == null 
                 && form.getTxtEncaminhamento().getDate() == null &&
-                form.getTxtQtdLaudos().getText().length() <= 0 && form.getTxtNucleos().getText().equals("")) {
+                form.getTxtQtdLaudos().getText().length() < 0 && form.getTxtNucleos().getText().equals("")) {
             return false;
         } else {
             return true;
@@ -192,7 +191,7 @@ public class ProducaoMedicaActionControl implements ActionListener {
         form.getTxtDataEntrada().setDate(pMedica.getEntradaCmr());
         form.getComboPrestador().setSelectedItem(pMedica.getPrestador());
         form.getComboProcedimento().setSelectedItem(pMedica.getProcedimento());
-        form.getTxtQtdLaudos().setValue(pMedica.getQuantidade());
+        //form.getTxtQtdLaudos().setText(Integer.parseInt(pMedica.getQuantidade()));
         form.getTxtDataAnalise().setDate(pMedica.getAnalise());
         form.getComboFuncionario().setSelectedItem(pMedica.getFuncionario());
         form.getTxtEncaminhamento().setDate(pMedica.getEncaminhamento());

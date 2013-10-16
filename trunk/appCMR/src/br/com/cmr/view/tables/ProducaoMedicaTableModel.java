@@ -24,7 +24,7 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
     private static final int COL_DATA_ANALISE = 5;
     private static final int COL_FUNCIONARIO = 6;
     private static final int COL_DATA_ENCAMINHAMENTO = 7;
-    private static final int COL_DATA_NUCLEOS = 8;
+    private static final int COL_NUCLEOS = 8;
     private List<ProducaoMedica> valores;
 
     public ProducaoMedicaTableModel(List<ProducaoMedica> valores) {
@@ -44,7 +44,7 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         ProducaoMedica pMedica = valores.get(rowIndex);
-        SimpleDateFormat formatdata = new SimpleDateFormat("dd/MM/yyyy");
+        //SimpleDateFormat formatdata = new SimpleDateFormat("dd/MM/yyyy");
         if (columnIndex == COL_ID) {
             return pMedica.getId();
         } else if (columnIndex == COL_ENTRADA_CMR) {
@@ -56,12 +56,12 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
         } else if (columnIndex == COL_QUANTIDADE_LAUDOS) {
             return pMedica.getQuantidade();
         } else if (columnIndex == COL_DATA_ANALISE) {
-            return formatdata.format(pMedica.getAnalise());
+            return pMedica.getAnalise();
         } else if (columnIndex == COL_FUNCIONARIO) {
             return pMedica.getFuncionario();
         } else if (columnIndex == COL_DATA_ENCAMINHAMENTO) {
-            return formatdata.format(pMedica.getEncaminhamento());
-        } else if (columnIndex == COL_DATA_NUCLEOS) {
+            return pMedica.getEncaminhamento();
+        } else if (columnIndex == COL_NUCLEOS) {
             return pMedica.getNucleos();
         }
         return null;
@@ -95,7 +95,7 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
             case COL_DATA_ENCAMINHAMENTO:
                 colunas = "Encaminhado";
                 break;
-            case COL_DATA_NUCLEOS:
+            case COL_NUCLEOS:
                 colunas = "Núcleos";
                 break;
             default:
@@ -122,8 +122,8 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
             return String.class;
         }else if (columnIndex == COL_DATA_ENCAMINHAMENTO) {
            return Date.class;
-        }else if (columnIndex == COL_DATA_NUCLEOS) {
-           return Date.class;
+        }else if (columnIndex == COL_NUCLEOS) {
+           return String.class;
         }
         return null; 
     }

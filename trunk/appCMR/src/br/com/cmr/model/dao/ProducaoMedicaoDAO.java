@@ -126,13 +126,13 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
             while(rs.next()){
                 ProducaoMedica pMedica = new ProducaoMedica();
                 pMedica.setId(rs.getLong("id"));
-                pMedica.setEntradaCmr(rs.getDate("entradaCmr"));
+                pMedica.setEntradaCmr(rs.getDate("data_entrada_cmr"));
                 pMedica.setPrestador(rs.getString("prestador"));
                 pMedica.setProcedimento(rs.getString("procedimento"));
-                pMedica.setQuantidade(rs.getInt("quantidade"));
-                pMedica.setAnalise(rs.getDate("analise"));
+                pMedica.setQuantidade(rs.getInt("quantidade_laudos"));
+                pMedica.setAnalise(rs.getDate("data_analise"));
                 pMedica.setFuncionario(rs.getString("funcionario"));
-                pMedica.setEncaminhamento(rs.getDate("encaminhamento"));
+                pMedica.setEncaminhamento(rs.getDate("data_encaminhamento"));
                 pMedica.setNucleos(rs.getString("nucleos"));
                 pMedicas.add(pMedica);
             } 
