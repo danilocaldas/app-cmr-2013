@@ -11,7 +11,7 @@ import br.com.cmr.view.controlforms.PrestadorActionControl;
  *
  * @author Danilo
  */
-public class FormPrestador extends javax.swing.JFrame {
+public class FormPrestador extends javax.swing.JInternalFrame {
     
     private PrestadorActionControl control;
     

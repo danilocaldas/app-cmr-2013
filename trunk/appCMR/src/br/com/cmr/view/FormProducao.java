@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Danilo
  */
-public class FormProducao extends javax.swing.JFrame {
+public class FormProducao extends javax.swing.JInternalFrame {
     List<Producao> listProducao;
     ProducaoActionControl actionControl;
     
