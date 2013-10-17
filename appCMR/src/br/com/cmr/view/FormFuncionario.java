@@ -11,7 +11,7 @@ import br.com.cmr.view.controlforms.FuncionarioActionControl;
  *
  * @author Danilo
  */
-public class FormFuncionario extends javax.swing.JFrame {
+public class FormFuncionario extends javax.swing.JInternalFrame {
 
     private FuncionarioActionControl control;
 

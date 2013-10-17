@@ -12,7 +12,7 @@ import br.com.cmr.view.controlforms.SistemaActionControl;
  */
 public class FormSistema extends javax.swing.JFrame {
 
-    private SistemaActionControl control;
+    public SistemaActionControl control;
     /**
      * Creates new form FormSistema
      */
@@ -30,11 +30,14 @@ public class FormSistema extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jDesktopPaneSistema = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         menuProducaoMedica = new javax.swing.JMenuItem();
+        menuFuncionarios = new javax.swing.JMenuItem();
+        menuPrestadores = new javax.swing.JMenuItem();
+        menuProcedimentos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,6 +49,15 @@ public class FormSistema extends javax.swing.JFrame {
         menuProducaoMedica.setText("Produção Médica");
         jMenu2.add(menuProducaoMedica);
 
+        menuFuncionarios.setText("Funcionários");
+        jMenu2.add(menuFuncionarios);
+
+        menuPrestadores.setText("Prestadores");
+        jMenu2.add(menuPrestadores);
+
+        menuProcedimentos.setText("Procedimentos");
+        jMenu2.add(menuProcedimentos);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -54,11 +66,11 @@ public class FormSistema extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
+            .addComponent(jDesktopPaneSistema, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+            .addComponent(jDesktopPaneSistema, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
         );
 
         pack();
@@ -75,7 +87,7 @@ public class FormSistema extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -99,10 +111,13 @@ public class FormSistema extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane jDesktopPaneSistema;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem menuFuncionarios;
+    private javax.swing.JMenuItem menuPrestadores;
+    private javax.swing.JMenuItem menuProcedimentos;
     private javax.swing.JMenuItem menuProducaoMedica;
     // End of variables declaration//GEN-END:variables
 
@@ -114,5 +129,13 @@ public class FormSistema extends javax.swing.JFrame {
         this.menuProducaoMedica = menuProducaoMedica;
     }
 
+    public javax.swing.JDesktopPane getjDesktopPaneSistema() {
+        return jDesktopPaneSistema;
+    }
 
+    public void setjDesktopPaneSistema(javax.swing.JDesktopPane jDesktopPaneSistema) {
+        this.jDesktopPaneSistema = jDesktopPaneSistema;
+    }
+
+    
 }

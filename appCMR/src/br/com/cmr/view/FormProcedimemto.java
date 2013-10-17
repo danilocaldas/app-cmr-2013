@@ -11,7 +11,7 @@ import br.com.cmr.view.controlforms.ProcedimentoActionControl;
  *
  * @author Danilo
  */
-public class FormProcedimemto extends javax.swing.JFrame {
+public class FormProcedimemto extends javax.swing.JInternalFrame{
 
     public ProcedimentoActionControl control;
     
