@@ -22,7 +22,8 @@ public class AcessoDAO implements IAcessoDAO {
     private static final String sqlAcesso = "select login, senha from usuarios where "
             + "login = ? and senha = ?"
             + "and role_user = 'ATIVO'";
-
+    
+   
     @Override
     public List<Usuarios> pesquisar(String nome, String senha, String role_user) {
         List<Usuarios> usuarios = new ArrayList<>();
@@ -35,11 +36,14 @@ public class AcessoDAO implements IAcessoDAO {
             pstm.setString(2, senha);
             rs = pstm.executeQuery();
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Seja bem vindo:", "Boas Vindas", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Seja bem vindo: ", "Boas Vindas",
+                        JOptionPane.INFORMATION_MESSAGE);
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário não cadastrado ou Inativo.\n"
-                        + " Contate o administrador do sistema", "Error", JOptionPane.ERROR_MESSAGE);
+                        + "Contate o administrador do sistema", "Error", JOptionPane.ERROR_MESSAGE);
             }
+
         } catch (SQLException ex) {
             try {
                 if (conn != null) {
@@ -54,4 +58,5 @@ public class AcessoDAO implements IAcessoDAO {
         }
         return usuarios;
     }
+
 }

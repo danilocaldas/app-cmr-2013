@@ -32,14 +32,14 @@ public class FormSistema extends javax.swing.JFrame {
 
         jDesktopPaneSistema = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        MenuInicio = new javax.swing.JMenu();
         menuTrocarUsuario = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        menuAnaliseMedica = new javax.swing.JMenu();
         menuProducaoMedica = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        menuDigitacao = new javax.swing.JMenu();
         menuProdDigitadores = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuManutencao = new javax.swing.JMenu();
         menuFuncionarios = new javax.swing.JMenuItem();
         menuPrestadores = new javax.swing.JMenuItem();
         menuProcedimentos = new javax.swing.JMenuItem();
@@ -48,42 +48,42 @@ public class FormSistema extends javax.swing.JFrame {
         setTitle("Sistema Núcleo APAC/AIH - CMR");
         setResizable(false);
 
-        jMenu1.setText("Inicio");
+        MenuInicio.setText("Inicio");
 
         menuTrocarUsuario.setText("Trocar usuário");
-        jMenu1.add(menuTrocarUsuario);
+        MenuInicio.add(menuTrocarUsuario);
 
         menuSair.setText("Sair");
-        jMenu1.add(menuSair);
+        MenuInicio.add(menuSair);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(MenuInicio);
 
-        jMenu4.setText("Analise Médica");
+        menuAnaliseMedica.setText("Analise Médica");
 
         menuProducaoMedica.setText("Produção Médica");
-        jMenu4.add(menuProducaoMedica);
+        menuAnaliseMedica.add(menuProducaoMedica);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(menuAnaliseMedica);
 
-        jMenu3.setText("Digitação");
+        menuDigitacao.setText("Digitação");
 
         menuProdDigitadores.setText("Produção digitadores");
-        jMenu3.add(menuProdDigitadores);
+        menuDigitacao.add(menuProdDigitadores);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(menuDigitacao);
 
-        jMenu2.setText("Manutenção");
+        menuManutencao.setText("Manutenção");
 
         menuFuncionarios.setText("Funcionários");
-        jMenu2.add(menuFuncionarios);
+        menuManutencao.add(menuFuncionarios);
 
         menuPrestadores.setText("Prestadores");
-        jMenu2.add(menuPrestadores);
+        menuManutencao.add(menuPrestadores);
 
         menuProcedimentos.setText("Procedimentos");
-        jMenu2.add(menuProcedimentos);
+        menuManutencao.add(menuProcedimentos);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuManutencao);
 
         setJMenuBar(jMenuBar1);
 
@@ -136,13 +136,13 @@ public class FormSistema extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu MenuInicio;
     private javax.swing.JDesktopPane jDesktopPaneSistema;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu menuAnaliseMedica;
+    private javax.swing.JMenu menuDigitacao;
     private javax.swing.JMenuItem menuFuncionarios;
+    private javax.swing.JMenu menuManutencao;
     private javax.swing.JMenuItem menuPrestadores;
     private javax.swing.JMenuItem menuProcedimentos;
     private javax.swing.JMenuItem menuProdDigitadores;
@@ -213,6 +213,38 @@ public class FormSistema extends javax.swing.JFrame {
 
     public void setjDesktopPaneSistema(javax.swing.JDesktopPane jDesktopPaneSistema) {
         this.jDesktopPaneSistema = jDesktopPaneSistema;
+    }
+
+    public javax.swing.JMenu getMenuInicio() {
+        return MenuInicio;
+    }
+
+    public void setMenuInicio(javax.swing.JMenu MenuInicio) {
+        this.MenuInicio = MenuInicio;
+    }
+
+    public javax.swing.JMenu getMenuAnaliseMedica() {
+        return menuAnaliseMedica;
+    }
+
+    public void setMenuAnaliseMedica(javax.swing.JMenu menuAnaliseMedica) {
+        this.menuAnaliseMedica = menuAnaliseMedica;
+    }
+
+    public javax.swing.JMenu getMenuDigitacao() {
+        return menuDigitacao;
+    }
+
+    public void setMenuDigitacao(javax.swing.JMenu menuDigitacao) {
+        this.menuDigitacao = menuDigitacao;
+    }
+
+    public javax.swing.JMenu getMenuManutencao() {
+        return menuManutencao;
+    }
+
+    public void setMenuManutencao(javax.swing.JMenu menuManutencao) {
+        this.menuManutencao = menuManutencao;
     }
     
        
