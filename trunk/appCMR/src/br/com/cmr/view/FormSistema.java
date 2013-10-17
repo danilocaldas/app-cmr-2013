@@ -46,6 +46,7 @@ public class FormSistema extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Núcleo APAC/AIH - CMR");
+        setResizable(false);
 
         jMenu1.setText("Inicio");
 
@@ -158,14 +159,6 @@ public class FormSistema extends javax.swing.JFrame {
         this.menuProducaoMedica = menuProducaoMedica;
     }
 
-    public javax.swing.JDesktopPane getjDesktopPaneSistema() {
-        return jDesktopPaneSistema;
-    }
-
-    public void setjDesktopPaneSistema(javax.swing.JDesktopPane jDesktopPaneSistema) {
-        this.jDesktopPaneSistema = jDesktopPaneSistema;
-    }
-
     public javax.swing.JMenuItem getMenuFuncionarios() {
         return menuFuncionarios;
     }
@@ -213,6 +206,14 @@ public class FormSistema extends javax.swing.JFrame {
     public void setMenuTrocarUsuario(javax.swing.JMenuItem menuTrocarUsuario) {
         this.menuTrocarUsuario = menuTrocarUsuario;
     }
+
+    public javax.swing.JDesktopPane getjDesktopPaneSistema() {
+        return jDesktopPaneSistema;
+    }
+
+    public void setjDesktopPaneSistema(javax.swing.JDesktopPane jDesktopPaneSistema) {
+        this.jDesktopPaneSistema = jDesktopPaneSistema;
+    }
     
-    
+       
 }

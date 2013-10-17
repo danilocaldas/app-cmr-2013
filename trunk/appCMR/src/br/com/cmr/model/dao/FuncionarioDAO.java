@@ -30,7 +30,7 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 
     @Override
     public int save(Funcionario funcionario) {
-         Connection conn = DBConnection.getConnection();
+        Connection conn = DBConnection.getConnection();
         PreparedStatement pstm = null;
         int result = 0;
         try {
