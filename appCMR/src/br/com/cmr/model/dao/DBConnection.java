@@ -162,4 +162,25 @@ public class DBConnection {
             close(connection, stmt, null);
         }
     }
+    
+     public static void createTableUsuarios(){
+        Connection connection = getConnection();
+        PreparedStatement stmt = null;
+        String sql = "CREATE TABLE IF NOT EXISTS usuarios (\n"
+                + "  ID bigint(20) NOT NULL AUTO_INCREMENT,\n"
+                + "  login VARCHAR(50) NOT NULL,\n"
+                + "  senha VARCHAR(50) NOT NULL,\n"
+                + "  role_user VARCHAR(50) NOT NULL,\n"
+                + "PRIMARY KEY (ID)\n"
+                + ")";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.execute();
+            System.out.println("Create Tables Usuarios Ok!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(connection, stmt, null);
+        }
+    }
 }

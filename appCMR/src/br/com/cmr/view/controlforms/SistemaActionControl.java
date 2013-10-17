@@ -12,6 +12,7 @@ import br.com.cmr.view.FormProducaoMedica;
 import br.com.cmr.view.FormSistema;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 
 /**
  *
@@ -24,6 +25,7 @@ public class SistemaActionControl implements ActionListener {
     public SistemaActionControl(FormSistema form) {
         this.form = form;
         addControlBtMenusForm();
+        form.setExtendedState(form.getExtendedState()| JFrame.MAXIMIZED_BOTH);
     }
 
     private void addControlBtMenusForm() {
@@ -78,9 +80,9 @@ public class SistemaActionControl implements ActionListener {
             abrirFuncionarios();
         } else if (e.getActionCommand().equals("Produção digitadores")) {
             abrirProdDigitadores();
-        }else if (e.getActionCommand().equals("Trocar usuário")) {
+        } else if (e.getActionCommand().equals("Trocar usuário")) {
             form.dispose();
-        }else if (e.getActionCommand().equals("Sair")) {
+        } else if (e.getActionCommand().equals("Sair")) {
             System.exit(0);
         }
     }
