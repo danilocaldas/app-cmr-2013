@@ -4,14 +4,13 @@
  */
 package br.com.cmr.view;
 
-import br.com.cmr.model.dao.DBConnection;
 import br.com.cmr.view.controlforms.AcessoActionControl;
 
 /**
  *
  * @author ritacosta
  */
-public class Acesso extends javax.swing.JFrame {
+public class Acesso extends javax.swing.JInternalFrame {
 
     public AcessoActionControl control;
     
@@ -21,7 +20,6 @@ public class Acesso extends javax.swing.JFrame {
     public Acesso() {
         initComponents();
         control = new AcessoActionControl(this);
-        DBConnection.createTableUsuarios();
     }
 
     /**
@@ -44,7 +42,9 @@ public class Acesso extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
         setTitle("Acesso ao Sistema S.N.APAC/AIH");
 
         jPanel1.setBackground(new java.awt.Color(58, 110, 165));
@@ -139,7 +139,8 @@ public class Acesso extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-331)/2, (screenSize.height-276)/2, 331, 276);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

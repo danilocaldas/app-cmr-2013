@@ -4,6 +4,7 @@
  */
 package br.com.cmr.view.controlforms;
 
+import br.com.cmr.view.Acesso;
 import br.com.cmr.view.FormFuncionario;
 import br.com.cmr.view.FormPrestador;
 import br.com.cmr.view.FormProcedimemto;
@@ -26,6 +27,18 @@ public class SistemaActionControl implements ActionListener {
         this.form = form;
         addControlBtMenusForm();
         form.setExtendedState(form.getExtendedState()| JFrame.MAXIMIZED_BOTH);
+        abrirFormAcesso();
+        habilitarMenus(false);
+    }
+    
+    
+    
+    private void habilitarMenus(boolean enable){
+        form.getMenuInicio().setEnabled(enable);
+        form.getMenuAnaliseMedica().setEnabled(enable);
+        form.getMenuDigitacao().setEnabled(enable);
+        form.getMenuManutencao().setEnabled(enable);
+        
     }
 
     private void addControlBtMenusForm() {
@@ -68,6 +81,20 @@ public class SistemaActionControl implements ActionListener {
         formSisFormProdu.show();
     }
 
+    private void abrirFormAcesso() {
+        Acesso formAcesso = new Acesso();
+        form.getjDesktopPaneSistema().add(formAcesso);
+        formAcesso.show();
+    }
+    
+    
+    private void validarAcesso(){
+        Acesso a = new Acesso();
+       {
+            
+        }
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Produção Médica")) {

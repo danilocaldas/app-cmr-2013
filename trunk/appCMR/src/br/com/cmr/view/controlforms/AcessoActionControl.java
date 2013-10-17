@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
  */
 public class AcessoActionControl implements ActionListener {
 
-    public Acesso form;
+    private Acesso form;
+       
 
     public AcessoActionControl(Acesso form) {
         this.form = form;
@@ -32,21 +33,25 @@ public class AcessoActionControl implements ActionListener {
         if (form.getTxtLogin().getText().length() > 0 && form.getTxtSenha().getText().length() > 0) {
             return true;
         }
-        JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios.", "Erro de validadação!",
+        JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios.", "Erro de validação!",
                 JOptionPane.ERROR_MESSAGE);
         return false;
     }
 
-    private void acessarSistema() {
-
+    
+    
+    private boolean acessarSistema() {
         if (validarCampos()) {
             AcessoController acesoo = new AcessoController();
             acesoo.buscarUsuarios("" + form.getTxtLogin().getText().trim() + "",
                     "" + form.getTxtSenha().getText().trim() + "");
+            return true;
+        }else{
+            return false;
         }
     }
-    
-    private void sairSistema(){
+
+    private void sairSistema() {
         System.exit(0);
     }
 
@@ -61,4 +66,14 @@ public class AcessoActionControl implements ActionListener {
                 break;
         }
     }
+
+    public Acesso getForm() {
+        return form;
+    }
+
+    public void setForm(Acesso form) {
+        this.form = form;
+    }
+    
+    
 }
