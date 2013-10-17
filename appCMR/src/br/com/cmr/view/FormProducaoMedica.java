@@ -36,7 +36,6 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
         txtDataAnalise = new com.toedter.calendar.JDateChooser();
         comboFuncionario = new javax.swing.JComboBox();
         txtEncaminhamento = new com.toedter.calendar.JDateChooser();
-        txtNucleos = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -47,6 +46,7 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         labelID = new javax.swing.JLabel();
+        comboNucleos = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         btAtualizar = new javax.swing.JButton();
         btSalvar = new javax.swing.JButton();
@@ -71,7 +71,6 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
         setTitle("Produção Médica");
 
@@ -94,6 +93,8 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
         jLabel8.setText("Nucleos:");
 
         jLabel9.setText("ID:");
+
+        comboNucleos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "DIGIT", "PREST" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,13 +135,15 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEncaminhamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel8)
-                        .addGap(0, 27, Short.MAX_VALUE))
-                    .addComponent(txtNucleos))
-                .addContainerGap())
+                        .addContainerGap(37, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(comboNucleos, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {comboPrestador, comboProcedimento});
@@ -184,7 +187,7 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEncaminhamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNucleos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(comboNucleos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -416,6 +419,7 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
     private javax.swing.JButton btPesquisar;
     private javax.swing.JButton btSalvar;
     private javax.swing.JComboBox comboFuncionario;
+    private javax.swing.JComboBox comboNucleos;
     private javax.swing.JComboBox comboPesquisaMedico;
     private javax.swing.JComboBox comboPrestador;
     private javax.swing.JComboBox comboProcedimento;
@@ -445,7 +449,6 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser txtDataDe;
     private com.toedter.calendar.JDateChooser txtDataEntrada;
     private com.toedter.calendar.JDateChooser txtEncaminhamento;
-    private javax.swing.JTextField txtNucleos;
     private javax.swing.JFormattedTextField txtQtdLaudos;
     // End of variables declaration//GEN-END:variables
 
@@ -537,14 +540,6 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
         this.txtDataEntrada = txtDataEntrada;
     }
 
-    public javax.swing.JTextField getTxtNucleos() {
-        return txtNucleos;
-    }
-
-    public void setTxtNucleos(javax.swing.JTextField txtNucleos) {
-        this.txtNucleos = txtNucleos;
-    }
-
     public javax.swing.JFormattedTextField getTxtQtdLaudos() {
         return txtQtdLaudos;
     }
@@ -618,4 +613,11 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
         this.txtDataDe = txtDataDe;
     }
 
+    public javax.swing.JComboBox getComboNucleos() {
+        return comboNucleos;
+    }
+
+    public void setComboNucleos(javax.swing.JComboBox comboNucleos) {
+        this.comboNucleos = comboNucleos;
+    }
 }

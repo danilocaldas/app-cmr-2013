@@ -39,4 +39,12 @@ public class FuncionarioController {
     public List<Funcionario> findNome(String nome){
         return facade.findNome(nome);
     }
+    
+    public List<Funcionario> findNomeMedico(){
+        return facade.findNomeMedico();
+    }
+    
+    public List<Funcionario> findNomeDigitador(){
+        return facade.findNomeDigitador();
+    }
 }

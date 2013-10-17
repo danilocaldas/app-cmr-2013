@@ -40,4 +40,12 @@ public class FuncionarioFacade {
     public List<Funcionario> findNome(String nome){
         return dao.findNome(nome);
     }
+    
+    public List<Funcionario> findNomeMedico(){
+        return dao.findNomeMedico();
+    }
+    
+    public List<Funcionario> findNomeDigitador(){
+        return dao.findNomeDigitador();
+    }
 }

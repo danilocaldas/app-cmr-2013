@@ -13,7 +13,7 @@ import br.com.cmr.view.controlforms.FuncionarioActionControl;
  */
 public class FormFuncionario extends javax.swing.JInternalFrame {
 
-    private FuncionarioActionControl control;
+    public FuncionarioActionControl control;
 
     public FormFuncionario() {
         initComponents();
@@ -37,7 +37,7 @@ public class FormFuncionario extends javax.swing.JInternalFrame {
         txtNome = new javax.swing.JTextField();
         txtSobrenome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtCargo = new javax.swing.JTextField();
+        comboCargo = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         btAtualizar = new javax.swing.JButton();
         btSalvar = new javax.swing.JButton();
@@ -48,8 +48,11 @@ public class FormFuncionario extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbFuncionario = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setResizable(true);
+        setTitle("Fomulário de funcionários");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -64,6 +67,8 @@ public class FormFuncionario extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Cargo:");
 
+        comboCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "DIGITADOR", "MÉDICO" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -77,8 +82,8 @@ public class FormFuncionario extends javax.swing.JInternalFrame {
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -97,9 +102,9 @@ public class FormFuncionario extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)
-                        .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1))
-                .addGap(20, 20, 20)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -188,7 +193,7 @@ public class FormFuncionario extends javax.swing.JInternalFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,6 +252,7 @@ public class FormFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btNovo;
     private javax.swing.JButton btSalvar;
+    private javax.swing.JComboBox comboCargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -256,7 +262,6 @@ public class FormFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbFuncionario;
-    private javax.swing.JTextField txtCargo;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtSobrenome;
@@ -310,14 +315,6 @@ public class FormFuncionario extends javax.swing.JInternalFrame {
         this.tbFuncionario = tbFuncionario;
     }
 
-    public javax.swing.JTextField getTxtCargo() {
-        return txtCargo;
-    }
-
-    public void setTxtCargo(javax.swing.JTextField txtCargo) {
-        this.txtCargo = txtCargo;
-    }
-
     public javax.swing.JTextField getTxtId() {
         return txtId;
     }
@@ -341,4 +338,14 @@ public class FormFuncionario extends javax.swing.JInternalFrame {
     public void setTxtSobrenome(javax.swing.JTextField txtSobrenome) {
         this.txtSobrenome = txtSobrenome;
     }
+
+    public javax.swing.JComboBox getComboCargo() {
+        return comboCargo;
+    }
+
+    public void setComboCargo(javax.swing.JComboBox comboCargo) {
+        this.comboCargo = comboCargo;
+    }
+    
+    
 }
