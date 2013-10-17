@@ -44,7 +44,6 @@ public class FuncionarioActionControl implements ActionListener {
     private void onCancelar() {
         enableFields(false);
         frm.getTxtId().setText("");
-        frm.getTxtCargo().setText("");
         frm.getTxtNome().setText("");
         frm.getTxtSobrenome().setText("");
 
@@ -52,9 +51,8 @@ public class FuncionarioActionControl implements ActionListener {
 
     private void onSaveFuncionario() {
         Funcionario funcionario = new Funcionario();
-        if (frm.getTxtCargo().getText().length() > 0
-                && frm.getTxtNome().getText().length() > 0 && frm.getTxtSobrenome().getText().length() > 0) {
-            funcionario.setCargo(frm.getTxtCargo().getText());
+        if (frm.getTxtNome().getText().length() > 0 && frm.getTxtSobrenome().getText().length() > 0) {
+            funcionario.setCargo(frm.getComboCargo().getSelectedItem().toString());
             funcionario.setNome(frm.getTxtNome().getText());
             funcionario.setSobrenome(frm.getTxtSobrenome().getText());
         } else {
@@ -92,7 +90,7 @@ public class FuncionarioActionControl implements ActionListener {
         frm.getTxtId().setText(String.valueOf(funcionario.getId()));
         frm.getTxtNome().setText(funcionario.getNome());
         frm.getTxtSobrenome().setText(funcionario.getSobrenome());
-        frm.getTxtCargo().setText(funcionario.getCargo());
+        frm.getComboCargo().setSelectedItem(funcionario.getCargo());
         enableFields(true);
     }
 
@@ -146,7 +144,7 @@ public class FuncionarioActionControl implements ActionListener {
     }
 
     private void enableFields(boolean enable) {
-        frm.getTxtCargo().setEnabled(enable);
+        frm.getComboCargo().setEnabled(enable);
         frm.getTxtNome().setEnabled(enable);
         frm.getTxtSobrenome().setEnabled(enable);
 

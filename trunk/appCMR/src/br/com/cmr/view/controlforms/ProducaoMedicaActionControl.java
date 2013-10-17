@@ -51,10 +51,11 @@ public class ProducaoMedicaActionControl implements ActionListener {
         form.getBtCancelar().addActionListener(this);
         form.getBtPesquisar().addActionListener(this);
         form.getBtLimpar().addActionListener(this);
+        
     }
 
     private void refreshCombo() {
-        listFuncionario = new FuncionarioController().findNome("%%");
+        listFuncionario = new FuncionarioController().findNomeMedico();
         listPrestador = new PrestadorController().findNome("%%");
         listProdimento = new ProcedimentoController().finfNome("%%");
         form.getComboFuncionario().removeAllItems();
@@ -79,7 +80,7 @@ public class ProducaoMedicaActionControl implements ActionListener {
     }
 
     private void refreshComboPesquisaMedica() {
-        listFuncionario = new FuncionarioController().findNome("%%");
+        listFuncionario = new FuncionarioController().findNomeMedico();
         form.getComboPesquisaMedico().removeAllItems();
 
         if (listFuncionario != null) {
@@ -102,6 +103,7 @@ public class ProducaoMedicaActionControl implements ActionListener {
 //        mostraDadosTable();
 //        somar();
 //    }
+    
 
     private void refreshTableNomePeriodo() {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
@@ -123,7 +125,7 @@ public class ProducaoMedicaActionControl implements ActionListener {
         form.getTxtDataAnalise().setEnabled(enabled);
         form.getComboFuncionario().setEnabled(enabled);
         form.getTxtEncaminhamento().setEnabled(enabled);
-        form.getTxtNucleos().setEnabled(enabled);
+        form.getComboNucleos().setEnabled(enabled);
     }
 
     private void onCancelar() {
@@ -132,7 +134,6 @@ public class ProducaoMedicaActionControl implements ActionListener {
         form.getTxtEncaminhamento().setDate(null);
         form.getTxtDataEntrada().setDate(null);
         form.getTxtQtdLaudos().setText("");
-        form.getTxtNucleos().setText("");
     }
 
     @Override
@@ -189,7 +190,7 @@ public class ProducaoMedicaActionControl implements ActionListener {
             pMedica.setAnalise(Date.valueOf(formato.format(dataAnalise)));
             pMedica.setFuncionario(form.getComboFuncionario().getSelectedItem().toString());
             pMedica.setEncaminhamento(Date.valueOf(formato.format(dataEncaminhamento)));
-            pMedica.setNucleos(form.getTxtNucleos().getText().trim());
+            pMedica.setNucleos(form.getComboNucleos().getSelectedItem().toString());
         } else {
             JOptionPane.showMessageDialog(form, "Todos os campos são obrigatórios!");
             return;
@@ -229,7 +230,7 @@ public class ProducaoMedicaActionControl implements ActionListener {
         form.getTxtDataAnalise().setDate(pMedica.getAnalise());
         form.getComboFuncionario().setSelectedItem(pMedica.getFuncionario());
         form.getTxtEncaminhamento().setDate(pMedica.getEncaminhamento());
-        form.getTxtNucleos().setText(pMedica.getNucleos());
+        form.getComboNucleos().setSelectedItem(pMedica.getNucleos());
         enableFilds(true);
         refreshCombo();
     }

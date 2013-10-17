@@ -18,4 +18,7 @@ public interface IFuncionarioDAO {
     int remove(Long id);
     List<Funcionario> findAll();
     List<Funcionario> findNome(String nome);
+    List<Funcionario> findNomeMedico();
+    List<Funcionario> findNomeDigitador();
+   
 }

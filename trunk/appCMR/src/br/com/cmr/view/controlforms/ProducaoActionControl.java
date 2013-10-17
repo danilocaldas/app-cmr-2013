@@ -46,7 +46,7 @@ public class ProducaoActionControl implements ActionListener {
     }
 
     private void refreshCombo() {
-        listFuncionario = new FuncionarioController().findNome("%%");
+        listFuncionario = new FuncionarioController().findNomeDigitador();
         listPrestador = new PrestadorController().findNome("%%");
         listProdimento = new ProcedimentoController().finfNome("%%");
         frm.getComboFuncionario().removeAllItems();

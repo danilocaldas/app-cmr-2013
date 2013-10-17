@@ -33,21 +33,45 @@ public class FormSistema extends javax.swing.JFrame {
         jDesktopPaneSistema = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        menuTrocarUsuario = new javax.swing.JMenuItem();
+        menuSair = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
         menuProducaoMedica = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        menuProdDigitadores = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
         menuFuncionarios = new javax.swing.JMenuItem();
         menuPrestadores = new javax.swing.JMenuItem();
         menuProcedimentos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema Núcleo APAC/AIH - CMR");
 
         jMenu1.setText("Inicio");
+
+        menuTrocarUsuario.setText("Trocar usuário");
+        jMenu1.add(menuTrocarUsuario);
+
+        menuSair.setText("Sair");
+        jMenu1.add(menuSair);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Manutenção");
+        jMenu4.setText("Analise Médica");
 
         menuProducaoMedica.setText("Produção Médica");
-        jMenu2.add(menuProducaoMedica);
+        jMenu4.add(menuProducaoMedica);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu3.setText("Digitação");
+
+        menuProdDigitadores.setText("Produção digitadores");
+        jMenu3.add(menuProdDigitadores);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu2.setText("Manutenção");
 
         menuFuncionarios.setText("Funcionários");
         jMenu2.add(menuFuncionarios);
@@ -114,11 +138,16 @@ public class FormSistema extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPaneSistema;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem menuFuncionarios;
     private javax.swing.JMenuItem menuPrestadores;
     private javax.swing.JMenuItem menuProcedimentos;
+    private javax.swing.JMenuItem menuProdDigitadores;
     private javax.swing.JMenuItem menuProducaoMedica;
+    private javax.swing.JMenuItem menuSair;
+    private javax.swing.JMenuItem menuTrocarUsuario;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JMenuItem getMenuProducaoMedica() {
@@ -137,5 +166,53 @@ public class FormSistema extends javax.swing.JFrame {
         this.jDesktopPaneSistema = jDesktopPaneSistema;
     }
 
+    public javax.swing.JMenuItem getMenuFuncionarios() {
+        return menuFuncionarios;
+    }
+
+    public void setMenuFuncionarios(javax.swing.JMenuItem menuFuncionarios) {
+        this.menuFuncionarios = menuFuncionarios;
+    }
+
+    public javax.swing.JMenuItem getMenuPrestadores() {
+        return menuPrestadores;
+    }
+
+    public void setMenuPrestadores(javax.swing.JMenuItem menuPrestadores) {
+        this.menuPrestadores = menuPrestadores;
+    }
+
+    public javax.swing.JMenuItem getMenuProcedimentos() {
+        return menuProcedimentos;
+    }
+
+    public void setMenuProcedimentos(javax.swing.JMenuItem menuProcedimentos) {
+        this.menuProcedimentos = menuProcedimentos;
+    }
+
+    public javax.swing.JMenuItem getMenuProdDigitadores() {
+        return menuProdDigitadores;
+    }
+
+    public void setMenuProdDigitadores(javax.swing.JMenuItem menuProdDigitadores) {
+        this.menuProdDigitadores = menuProdDigitadores;
+    }
+
+    public javax.swing.JMenuItem getMenuSair() {
+        return menuSair;
+    }
+
+    public void setMenuSair(javax.swing.JMenuItem menuSair) {
+        this.menuSair = menuSair;
+    }
+
+    public javax.swing.JMenuItem getMenuTrocarUsuario() {
+        return menuTrocarUsuario;
+    }
+
+    public void setMenuTrocarUsuario(javax.swing.JMenuItem menuTrocarUsuario) {
+        this.menuTrocarUsuario = menuTrocarUsuario;
+    }
+    
     
 }

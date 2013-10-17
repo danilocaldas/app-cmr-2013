@@ -25,7 +25,8 @@ public class FuncionarioDAO implements IFuncionarioDAO{
     private static final String sqlDelete = "delete from FUNCIONARIO where ID = ? ";
     private static final String sqlFindAll = "select * from FUNCIONARIO";
     private static final String sqlFindNome = "select * from FUNCIONARIO where nome like ? order by nome";
-    
+    private static final String sqlFindFunMedico = "select nome from funcionario where cargo = 'MÉDICO'";
+    private static final String sqlFindFunDigitador = "select nome from funcionario where cargo = 'DIGITADOR'";
 
     @Override
     public int save(Funcionario funcionario) {
@@ -147,6 +148,64 @@ public class FuncionarioDAO implements IFuncionarioDAO{
         try {
             pstm = conn.prepareStatement(sqlFindNome);
             pstm.setString(1, nome);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Funcionario funcionario = new  Funcionario();
+                funcionario.setNome(rs.getString("nome"));
+                funcionarios.add(funcionario);
+            }
+        } catch (SQLException ex) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            } finally {
+                DBConnection.close(conn, pstm, rs);
+            }
+            ex.printStackTrace();
+        }
+        return funcionarios;
+    }
+
+    @Override
+    public List<Funcionario> findNomeMedico() {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement pstm = null;
+        List<Funcionario> funcionarios = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            pstm = conn.prepareStatement(sqlFindFunMedico);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Funcionario funcionario = new  Funcionario();
+                funcionario.setNome(rs.getString("nome"));
+                funcionarios.add(funcionario);
+            }
+        } catch (SQLException ex) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            } finally {
+                DBConnection.close(conn, pstm, rs);
+            }
+            ex.printStackTrace();
+        }
+        return funcionarios;
+    }
+
+    @Override
+    public List<Funcionario> findNomeDigitador() {
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement pstm = null;
+        List<Funcionario> funcionarios = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            pstm = conn.prepareStatement(sqlFindFunDigitador);
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Funcionario funcionario = new  Funcionario();
