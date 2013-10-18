@@ -4,6 +4,7 @@
  */
 package br.com.cmr.view;
 
+import br.com.cmr.model.dao.CriaConexao;
 import br.com.cmr.model.dao.DBConnection;
 import br.com.cmr.model.entity.Usuarios;
 import java.sql.Connection;
@@ -12,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -43,16 +46,17 @@ public class Acesso extends javax.swing.JFrame {
         return false;
     }
 
-    private void acessarSistema() {
+    private void acessarSistema() throws SQLException {
         if (validarCampos()) {
             pesquisar("" + txtLogin.getText().trim() + "", "" + txtSenha.getText().trim() + "");
             
         }
     }
 
-    public List<Usuarios> pesquisar(String nome, String senha) {
+    public List<Usuarios> pesquisar(String nome, String senha) throws SQLException {
         List<Usuarios> usuarios = new ArrayList<>();
-        Connection conn = DBConnection.getConnection();
+//        Connection conn = DBConnection.getConnection();
+        Connection conn = CriaConexao.getConexao();
         PreparedStatement pstm = null;
         ResultSet rs = null;
         try {
@@ -219,7 +223,11 @@ public class Acesso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
-        acessarSistema();
+        try {
+            acessarSistema();
+        } catch (SQLException ex) {
+            Logger.getLogger(Acesso.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btEntrarActionPerformed
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
