@@ -4,22 +4,90 @@
  */
 package br.com.cmr.view;
 
-import br.com.cmr.view.controlforms.AcessoActionControl;
+import br.com.cmr.model.dao.DBConnection;
+import br.com.cmr.model.entity.Usuarios;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ritacosta
  */
-public class Acesso extends javax.swing.JInternalFrame {
+public class Acesso extends javax.swing.JFrame {
 
-    public AcessoActionControl control;
+    private static final String sqlAcesso = "select login, senha from usuarios where "
+            + "login = ? and senha = ?"
+            + "and role_user = 'ATIVO'";
+    
+    FormSistema sis = new FormSistema();
     
     /**
      * Creates new form Acesso
      */
     public Acesso() {
         initComponents();
-        control = new AcessoActionControl(this);
+        setLocationRelativeTo(null);
+    }
+
+    private boolean validarCampos() {
+        if (txtLogin.getText().length() > 0 && txtSenha.getText().length() > 0) {
+            return true;
+        }
+        JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios.", "Erro de validação!",
+                JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+
+    private void acessarSistema() {
+        if (validarCampos()) {
+            pesquisar("" + txtLogin.getText().trim() + "", "" + txtSenha.getText().trim() + "");
+            
+        }
+    }
+
+    public List<Usuarios> pesquisar(String nome, String senha) {
+        List<Usuarios> usuarios = new ArrayList<>();
+        Connection conn = DBConnection.getConnection();
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            pstm = conn.prepareStatement(sqlAcesso);
+            pstm.setString(1, nome);
+            pstm.setString(2, senha);
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Seja bem vindo: ", "Boas Vindas",
+                        JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                sis.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário não cadastrado ou Inativo.\n"
+                        + "Contate o administrador do sistema", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (SQLException ex) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException ex1) {
+                ex1.printStackTrace();
+            } finally {
+                DBConnection.close(conn, pstm, rs);
+            }
+            ex.printStackTrace();
+        }
+        return usuarios;
+    }
+
+    private void sairSistema() {
+        System.exit(0);
     }
 
     /**
@@ -42,9 +110,7 @@ public class Acesso extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconifiable(true);
         setTitle("Acesso ao Sistema S.N.APAC/AIH");
 
         jPanel1.setBackground(new java.awt.Color(58, 110, 165));
@@ -59,9 +125,19 @@ public class Acesso extends javax.swing.JInternalFrame {
 
         btEntrar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btEntrar.setText("Entrar");
+        btEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEntrarActionPerformed(evt);
+            }
+        });
 
         btSair.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btSair.setText("Sair");
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -139,9 +215,16 @@ public class Acesso extends javax.swing.JInternalFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-331)/2, (screenSize.height-276)/2, 331, 276);
+        setBounds(0, 0, 331, 276);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
+        acessarSistema();
+    }//GEN-LAST:event_btEntrarActionPerformed
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        sairSistema();
+    }//GEN-LAST:event_btSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,35 +273,5 @@ public class Acesso extends javax.swing.JInternalFrame {
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 
-    public javax.swing.JButton getBtEntrar() {
-        return btEntrar;
-    }
-
-    public void setBtEntrar(javax.swing.JButton btEntrar) {
-        this.btEntrar = btEntrar;
-    }
-
-    public javax.swing.JButton getBtSair() {
-        return btSair;
-    }
-
-    public void setBtSair(javax.swing.JButton btSair) {
-        this.btSair = btSair;
-    }
-
-    public javax.swing.JTextField getTxtLogin() {
-        return txtLogin;
-    }
-
-    public void setTxtLogin(javax.swing.JTextField txtLogin) {
-        this.txtLogin = txtLogin;
-    }
-
-    public javax.swing.JPasswordField getTxtSenha() {
-        return txtSenha;
-    }
-
-    public void setTxtSenha(javax.swing.JPasswordField txtSenha) {
-        this.txtSenha = txtSenha;
-    }
+    
 }

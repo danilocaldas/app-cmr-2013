@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.text.Document;
 
 /**
  *
@@ -61,7 +62,7 @@ public class FuncionarioActionControl implements ActionListener {
         }
 
         int result = 0;
-        
+
         if (idFuncionario == null) {
             result = new FuncionarioController().addFuncionario(funcionario);
         } else {
@@ -69,7 +70,7 @@ public class FuncionarioActionControl implements ActionListener {
             result = new FuncionarioController().updateFuncionario(funcionario);
             idFuncionario = null;
         }
-        if(result == 1){
+        if (result == 1) {
             JOptionPane.showMessageDialog(frm, "Funcionário inserido com sucesso!");
             enableFields(false);
             onCancelar();
@@ -78,7 +79,7 @@ public class FuncionarioActionControl implements ActionListener {
             JOptionPane.showMessageDialog(frm, "Tente novamente!");
         }
     }
-    
+
     private void onAlterarFuncionario() {
         int indexRow = frm.getTbFuncionario().getSelectedRow();
         if (indexRow == -1) {
@@ -132,7 +133,7 @@ public class FuncionarioActionControl implements ActionListener {
             case "Atualizar":
                 onAlterarFuncionario();
                 break;
-        } 
+        }
     }
 
     private void refreshTable() {
