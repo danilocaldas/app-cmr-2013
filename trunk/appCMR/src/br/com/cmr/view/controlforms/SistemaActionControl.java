@@ -27,20 +27,8 @@ public class SistemaActionControl implements ActionListener {
         this.form = form;
         addControlBtMenusForm();
         form.setExtendedState(form.getExtendedState()| JFrame.MAXIMIZED_BOTH);
-        abrirFormAcesso();
-        habilitarMenus(false);
     }
     
-    
-    
-    private void habilitarMenus(boolean enable){
-        form.getMenuInicio().setEnabled(enable);
-        form.getMenuAnaliseMedica().setEnabled(enable);
-        form.getMenuDigitacao().setEnabled(enable);
-        form.getMenuManutencao().setEnabled(enable);
-        
-    }
-
     private void addControlBtMenusForm() {
         form.getMenuProducaoMedica().addActionListener(this);
         form.getMenuPrestadores().addActionListener(this);
@@ -81,21 +69,7 @@ public class SistemaActionControl implements ActionListener {
         formSisFormProdu.show();
     }
 
-    private void abrirFormAcesso() {
-        Acesso formAcesso = new Acesso();
-        form.getjDesktopPaneSistema().add(formAcesso);
-        formAcesso.show();
-    }
-    
-    
-    private void validarAcesso(){
-        Acesso a = new Acesso();
-       {
-            
-        }
-    }
-    
-    @Override
+   @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Produção Médica")) {
             abrirProducaoMedica();
@@ -113,4 +87,6 @@ public class SistemaActionControl implements ActionListener {
             System.exit(0);
         }
     }
+   
+   
 }
