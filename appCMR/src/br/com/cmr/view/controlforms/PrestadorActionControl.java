@@ -71,8 +71,8 @@ public class PrestadorActionControl implements ActionListener{
         Prestador prestador = new Prestador();
         if (frm.getTxtCnes().getText().length() > 0
                 && frm.getTxtNome().getText().length() > 0 ) {
-            prestador.setCnes(frm.getTxtCnes().getText());
-            prestador.setNome(frm.getTxtNome().getText());
+            prestador.setCnes(frm.getTxtCnes().getText().toUpperCase());
+            prestador.setNome(frm.getTxtNome().getText().toUpperCase());
         } else {
             JOptionPane.showMessageDialog(frm, "Todos os campos são obrigatórios!");
             return;

@@ -54,8 +54,8 @@ public class FuncionarioActionControl implements ActionListener {
         Funcionario funcionario = new Funcionario();
         if (frm.getTxtNome().getText().length() > 0 && frm.getTxtSobrenome().getText().length() > 0) {
             funcionario.setCargo(frm.getComboCargo().getSelectedItem().toString());
-            funcionario.setNome(frm.getTxtNome().getText());
-            funcionario.setSobrenome(frm.getTxtSobrenome().getText());
+            funcionario.setNome(frm.getTxtNome().getText().toUpperCase());
+            funcionario.setSobrenome(frm.getTxtSobrenome().getText().toUpperCase());
         } else {
             JOptionPane.showMessageDialog(frm, "Todos os campos são obrigatórios!");
             return;

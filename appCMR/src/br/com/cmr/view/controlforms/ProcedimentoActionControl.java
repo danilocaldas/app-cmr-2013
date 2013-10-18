@@ -68,8 +68,8 @@ public class ProcedimentoActionControl implements ActionListener {
         Procedimento procedimento = new Procedimento();
         if (frm.getTxtCodigo().getText().length() > 0
                 && frm.getTxtNome().getText().length() > 0) {
-            procedimento.setCodigo(frm.getTxtCodigo().getText());
-            procedimento.setNome(frm.getTxtNome().getText());
+            procedimento.setCodigo(frm.getTxtCodigo().getText().toUpperCase());
+            procedimento.setNome(frm.getTxtNome().getText().toUpperCase());
         } else {
             JOptionPane.showMessageDialog(frm, "Todos os campos são obrigatórios!");
             return;
