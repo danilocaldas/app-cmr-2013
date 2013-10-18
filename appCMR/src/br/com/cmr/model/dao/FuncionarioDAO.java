@@ -30,10 +30,12 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 
     @Override
     public int save(Funcionario funcionario) {
-        Connection conn = DBConnection.getConnection();
+        //Connection conn = DBConnection.getConnection();
+        Connection conn = null;
         PreparedStatement pstm = null;
         int result = 0;
         try {
+            conn = CriaConexao.getConexao();
             int index = 0;
             pstm = conn.prepareStatement(sqlInsert);
             pstm.setString(++index, funcionario.getNome());
@@ -48,7 +50,8 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
             } finally {
-                DBConnection.close(conn, pstm, null);
+                //DBConnection.close(conn, pstm, null);
+                CriaConexao.close(conn, pstm, null);
             }
             ex.printStackTrace();
         }
@@ -57,10 +60,11 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 
     @Override
     public int update(Funcionario funcionario) {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = null;
         PreparedStatement pstm = null;
         int result = 0;
         try {
+            conn = CriaConexao.getConexao();
             int index = 0;
             pstm = conn.prepareStatement(sqlUpdate);
             pstm.setString(++index, funcionario.getNome());
@@ -76,7 +80,8 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
             } finally {
-                DBConnection.close(conn, pstm, null);
+                //DBConnection.close(conn, pstm, null);
+                CriaConexao.close(conn, pstm, null);
             }
             ex.printStackTrace();
         }
@@ -85,10 +90,11 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 
     @Override
     public int remove(Long id) {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = null;
         PreparedStatement pstm = null;
         int result = 0;
         try {
+            conn = CriaConexao.getConexao();
             pstm = conn.prepareStatement(sqlDelete);
             pstm.setLong(1, id);
             result = pstm.executeUpdate();
@@ -100,7 +106,8 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
             } finally {
-                DBConnection.close(conn, pstm, null);
+                //DBConnection.close(conn, pstm, null);
+                CriaConexao.close(conn, pstm, null);
             }
             ex.printStackTrace();
         }
@@ -109,11 +116,12 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 
     @Override
     public List<Funcionario> findAll() {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = null;
         PreparedStatement pstm = null;
         List<Funcionario> funcionarios = new ArrayList<>();
         ResultSet rs = null;
         try {
+            conn = CriaConexao.getConexao();
             pstm = conn.prepareStatement(sqlFindAll);
             rs = pstm.executeQuery();
             while (rs.next()) {
@@ -132,7 +140,8 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
             } finally {
-                DBConnection.close(conn, pstm, rs);
+                //DBConnection.close(conn, pstm, rs);
+                CriaConexao.close(conn, pstm, rs);
             }
             ex.printStackTrace();
         }
@@ -141,11 +150,12 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 
     @Override
     public List<Funcionario> findNome(String nome) {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = null;
         PreparedStatement pstm = null;
         List<Funcionario> funcionarios = new ArrayList<>();
         ResultSet rs = null;
         try {
+            conn = CriaConexao.getConexao();
             pstm = conn.prepareStatement(sqlFindNome);
             pstm.setString(1, nome);
             rs = pstm.executeQuery();
@@ -162,7 +172,8 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
             } finally {
-                DBConnection.close(conn, pstm, rs);
+                //DBConnection.close(conn, pstm, rs);
+                CriaConexao.close(conn, pstm, rs);
             }
             ex.printStackTrace();
         }
@@ -171,11 +182,12 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 
     @Override
     public List<Funcionario> findNomeMedico() {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = null;
         PreparedStatement pstm = null;
         List<Funcionario> funcionarios = new ArrayList<>();
         ResultSet rs = null;
         try {
+            conn = CriaConexao.getConexao();
             pstm = conn.prepareStatement(sqlFindFunMedico);
             rs = pstm.executeQuery();
             while (rs.next()) {
@@ -191,7 +203,8 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
             } finally {
-                DBConnection.close(conn, pstm, rs);
+                //DBConnection.close(conn, pstm, rs);
+                CriaConexao.close(conn, pstm, rs);
             }
             ex.printStackTrace();
         }
@@ -200,11 +213,12 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 
     @Override
     public List<Funcionario> findNomeDigitador() {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = null;
         PreparedStatement pstm = null;
         List<Funcionario> funcionarios = new ArrayList<>();
         ResultSet rs = null;
         try {
+            conn = CriaConexao.getConexao();
             pstm = conn.prepareStatement(sqlFindFunDigitador);
             rs = pstm.executeQuery();
             while (rs.next()) {
@@ -220,7 +234,8 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
             } finally {
-                DBConnection.close(conn, pstm, rs);
+                //DBConnection.close(conn, pstm, rs);
+                CriaConexao.close(conn, pstm, null);
             }
             ex.printStackTrace();
         }

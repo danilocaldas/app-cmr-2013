@@ -9,8 +9,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -19,7 +17,7 @@ import java.util.logging.Logger;
 public class CriaConexao {
 
     static String DRIVER_HSQLDB = "org.hsqldb.jdbcDriver";
-    static String URL = "jdbc:hsqldb:file:C:\\Users\\Danilo\\Documents\\NetBeansProjects\\trunk\\appCMR\\lib\\sna";
+    static String URL = "jdbc:hsqldb:file:C:\\Documents and Settings\\ritacosta\\Meus documentos\\NetBeansProjects\\app-cmr-official\\trunk\\appCMR\\lib\\sna";
     static String USER = "SA";
     static String PASSWORD_H2 = "12345";
 
