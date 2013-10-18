@@ -19,6 +19,9 @@ public class FormFuncionario extends javax.swing.JInternalFrame {
         initComponents();
         control = new FuncionarioActionControl(this);
     }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
