@@ -33,10 +33,12 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
 
     @Override
     public int save(ProducaoMedica pMedica) {
-        Connection conn = DBConnection.getConnection();
+        //Connection conn = DBConnection.getConnection();
+        Connection conn = null;
         PreparedStatement pstm = null;
         int result = 0;
         try {
+            conn = CriaConexao.getConexao();
             int index = 0;
             pstm = conn.prepareStatement(sqlInsert);
             pstm.setDate(++index, pMedica.getEntradaCmr());
@@ -56,7 +58,8 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
             } finally {
-                DBConnection.close(conn, pstm, null);
+                //DBConnection.close(conn, pstm, null);
+                CriaConexao.close(conn, pstm, null);
             }
             ex.printStackTrace();
         }
@@ -65,10 +68,12 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
 
     @Override
     public int updade(ProducaoMedica pMedica) {
-        Connection conn = DBConnection.getConnection();
+        //Connection conn = DBConnection.getConnection();
+        Connection conn = null;
         PreparedStatement pstm = null;
         int result = 0;
         try {
+            conn = CriaConexao.getConexao();
             int index = 0;
             pstm = conn.prepareStatement(sqlUpdate);
             pstm.setDate(++index, pMedica.getEntradaCmr());
@@ -89,7 +94,8 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
             } finally {
-                DBConnection.close(conn, pstm, null);
+                //DBConnection.close(conn, pstm, null);
+                CriaConexao.close(conn, pstm, null);
             }
             ex.printStackTrace();
         }
@@ -98,10 +104,11 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
 
     @Override
     public int delete(Long id) {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = null;
         PreparedStatement pstm = null;
         int result = 0;
         try {
+            conn = CriaConexao.getConexao();
             pstm = conn.prepareStatement(sqlDelete);
             pstm.setLong(1, id);
             result = pstm.executeUpdate();
@@ -122,11 +129,12 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
 
     @Override
     public List<ProducaoMedica> listar() {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
         List<ProducaoMedica> pMedicas = new ArrayList();
         try {
+            conn = CriaConexao.getConexao();
             pstm = conn.prepareStatement(sqlList);
             rs = pstm.executeQuery();
             while(rs.next()){
@@ -150,7 +158,8 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
             } finally {
-                DBConnection.close(conn, pstm, rs);
+               // DBConnection.close(conn, pstm, rs);
+                CriaConexao.close(conn, pstm, rs);
             }
             ex.printStackTrace();
         }
@@ -159,11 +168,12 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
 
     @Override
     public List<ProducaoMedica> listarProMedica(String nome, Date dataDe, Date dataAte) {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
         List<ProducaoMedica> pMedicas = new ArrayList();
         try {
+            conn = CriaConexao.getConexao();
             pstm = conn.prepareStatement(sqlListNomePeriodo);
             pstm.setString(1, nome);
             pstm.setDate(2, dataDe);
@@ -190,7 +200,8 @@ public class ProducaoMedicaoDAO implements IProducaoMedicaDAO {
             } catch (SQLException ex1) {
                 ex1.printStackTrace();
             } finally {
-                DBConnection.close(conn, pstm, rs);
+                //DBConnection.close(conn, pstm, rs);
+                CriaConexao.close(conn, pstm, rs);
             }
             ex.printStackTrace();
         }
