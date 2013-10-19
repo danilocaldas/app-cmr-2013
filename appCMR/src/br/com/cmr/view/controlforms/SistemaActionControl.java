@@ -83,10 +83,10 @@ public class SistemaActionControl implements ActionListener {
             abrirProdDigitadores();
         } else if (e.getActionCommand().equals("Trocar usuário")) {
             form.dispose();
+            Acesso a = new Acesso();
+            a.setVisible(true);
         } else if (e.getActionCommand().equals("Sair")) {
             System.exit(0);
         }
     }
-   
-   
 }

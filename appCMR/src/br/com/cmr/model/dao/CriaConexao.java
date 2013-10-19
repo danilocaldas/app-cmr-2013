@@ -23,7 +23,7 @@ public class CriaConexao {
 
         System.out.println("Conectando ao banco!");
         try {
-            String path = System.getProperty("user.dir") + "\\sna";
+            String path = System.getProperty("user.dir") + "\\bd\\sna";
             Class.forName(DRIVER_HSQLDB);
             return DriverManager.getConnection("jdbc:hsqldb:file:"+path, USER, PASSWORD_H2);
         } catch (ClassNotFoundException ex) {

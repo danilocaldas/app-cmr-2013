@@ -64,7 +64,6 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         labelTotal = new javax.swing.JLabel();
         btPesquisar = new javax.swing.JButton();
-        btLimpar = new javax.swing.JButton();
         txtDataAte = new com.toedter.calendar.JDateChooser();
         txtDataDe = new com.toedter.calendar.JDateChooser();
 
@@ -263,9 +262,6 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
         btPesquisar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btPesquisar.setText("PESQUISAR");
 
-        btLimpar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btLimpar.setText("LIMPAR");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -293,19 +289,14 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel4Layout.createSequentialGroup()
                                         .addComponent(comboPesquisaMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(btPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 286, Short.MAX_VALUE)))
+                        .addGap(0, 425, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btLimpar, btPesquisar});
-
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -321,8 +312,7 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
                         .addComponent(txtDataAte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(comboPesquisaMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btPesquisar)
-                            .addComponent(btLimpar)))
+                            .addComponent(btPesquisar)))
                     .addComponent(txtDataDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -333,8 +323,6 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btLimpar, btPesquisar});
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -344,7 +332,7 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -414,7 +402,6 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
     private javax.swing.JButton btAtualizar;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btExcluir;
-    private javax.swing.JButton btLimpar;
     private javax.swing.JButton btNovo;
     private javax.swing.JButton btPesquisar;
     private javax.swing.JButton btSalvar;
@@ -580,14 +567,6 @@ public class FormProducaoMedica extends javax.swing.JInternalFrame {
         this.labelTotal = labelTotal;
     }
 
-
-    public javax.swing.JButton getBtLimpar() {
-        return btLimpar;
-    }
-
-    public void setBtLimpar(javax.swing.JButton btLimpar) {
-        this.btLimpar = btLimpar;
-    }
 
     public javax.swing.JButton getBtPesquisar() {
         return btPesquisar;

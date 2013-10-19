@@ -21,7 +21,6 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 
 /**
  *
@@ -51,8 +50,7 @@ public class ProducaoMedicaActionControl implements ActionListener {
         form.getBtExcluir().addActionListener(this);
         form.getBtCancelar().addActionListener(this);
         form.getBtPesquisar().addActionListener(this);
-        form.getBtLimpar().addActionListener(this);
-        
+
     }
 
     private void refreshCombo() {
@@ -104,8 +102,6 @@ public class ProducaoMedicaActionControl implements ActionListener {
 //        mostraDadosTable();
 //        somar();
 //    }
-    
-
     private void refreshTableNomePeriodo() {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date dataDe = (java.util.Date) form.getTxtDataDe().getDate();
@@ -114,7 +110,7 @@ public class ProducaoMedicaActionControl implements ActionListener {
                 "%" + form.getComboPesquisaMedico().getSelectedItem().toString() + "%", Date.valueOf(formato.format(dataDe)), Date.valueOf(formato.format(dataAte)));
         mostraDadosTable();
         somarQtdAnalisada();
-        
+
     }
 
     private void enableFilds(boolean enabled) {
@@ -164,7 +160,6 @@ public class ProducaoMedicaActionControl implements ActionListener {
                     JOptionPane.showMessageDialog(form, "As datas são necessárias para pesquisa.",
                             "Validação", JOptionPane.ERROR_MESSAGE);
                 }
-                break;
         }
     }
 
@@ -256,7 +251,7 @@ public class ProducaoMedicaActionControl implements ActionListener {
         }
     }
 
-   private void somarQtdAnalisada() {
+    private void somarQtdAnalisada() {
         int total = 0;
         String valor = "";
         int linhas = form.getTbProducaoMedica().getRowCount();
@@ -266,13 +261,11 @@ public class ProducaoMedicaActionControl implements ActionListener {
         }
         form.getLabelTotal().setText("" + total);
     }
-   
-      
-    private void limparCombo(){
+
+    private void limparCombo() {
         form.getComboFuncionario().removeAllItems();
         form.getComboPrestador().removeAllItems();
         form.getComboProcedimento().removeAllItems();
     }
     
-  
 }
