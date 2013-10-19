@@ -24,8 +24,6 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
     private static final int COL_FUNCIONARIO = 6;
     private static final int COL_DATA_ENCAMINHAMENTO = 7;
     private static final int COL_NUCLEOS = 8;
-    private static final int COL_DIA_MEDICO = 9;
-    private static final int COL_DIA_APAC = 10;
     private List<ProducaoMedica> valores;
 
     public ProducaoMedicaTableModel(List<ProducaoMedica> valores) {
@@ -39,7 +37,7 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 11;
+        return 9;
     }
 
     @Override
@@ -66,10 +64,6 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
             return pMedica.getEncaminhamento();
         } else if (columnIndex == COL_NUCLEOS) {
             return pMedica.getNucleos();
-        }else if (columnIndex == COL_DIA_MEDICO) {
-            return null;
-        } else if (columnIndex == COL_DIA_APAC) {
-            return null;
         }
         return null;
     }
@@ -105,12 +99,6 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
             case COL_NUCLEOS:
                 colunas = "Núcleos";
                 break;
-            case COL_DIA_MEDICO:
-                colunas = "DIAS/MED.";
-                break;
-            case COL_DIA_APAC:
-                colunas = "DIAS/APAC";
-                break;
             default:
                 throw new IllegalArgumentException("Coluna Inválida!");
         }
@@ -137,10 +125,6 @@ public class ProducaoMedicaTableModel extends AbstractTableModel {
             return Date.class;
         } else if (columnIndex == COL_NUCLEOS) {
             return String.class;
-        }else if (columnIndex == COL_DIA_MEDICO) {
-            return Date.class;
-        }else if (columnIndex == COL_DIA_APAC) {
-            return Date.class;
         }
         return null;
     }
