@@ -21,6 +21,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -272,4 +273,6 @@ public class ProducaoMedicaActionControl implements ActionListener {
         form.getComboPrestador().removeAllItems();
         form.getComboProcedimento().removeAllItems();
     }
+    
+  
 }

@@ -15,9 +15,7 @@ import java.sql.SQLException;
  * @author Danilo
  */
 public class CriaConexao {
-
     static String DRIVER_HSQLDB = "org.hsqldb.jdbcDriver";
-    static String URL = "jdbc:hsqldb:file:C:\\Documents and Settings\\ritacosta\\Meus documentos\\NetBeansProjects\\app-cmr-official\\trunk\\appCMR\\lib\\sna";
     static String USER = "SA";
     static String PASSWORD_H2 = "12345";
 
@@ -25,8 +23,9 @@ public class CriaConexao {
 
         System.out.println("Conectando ao banco!");
         try {
+            String path = System.getProperty("user.dir") + "\\sna";
             Class.forName(DRIVER_HSQLDB);
-            return DriverManager.getConnection(URL, USER, PASSWORD_H2);
+            return DriverManager.getConnection("jdbc:hsqldb:file:"+path, USER, PASSWORD_H2);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         } catch (SQLException ex) {
