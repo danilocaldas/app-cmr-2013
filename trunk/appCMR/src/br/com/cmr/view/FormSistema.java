@@ -48,6 +48,8 @@ public class FormSistema extends javax.swing.JFrame {
         setTitle("Sistema Núcleo APAC/AIH - CMR");
         setResizable(false);
 
+        jDesktopPaneSistema.setBackground(new java.awt.Color(255, 255, 255));
+
         MenuInicio.setText("Inicio");
 
         menuTrocarUsuario.setText("Trocar usuário");
